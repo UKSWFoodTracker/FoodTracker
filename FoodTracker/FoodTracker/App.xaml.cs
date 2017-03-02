@@ -13,7 +13,7 @@ namespace FoodTracker
 		{
 			InitializeComponent();
 
-			MainPage = new FoodTracker.MainPage();
+			MainPage = new View.MainPage();
 		}
 
 		protected override void OnStart ()
