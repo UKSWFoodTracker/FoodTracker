@@ -14,5 +14,15 @@ namespace FoodTracker.View
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private async void btnAddMeal_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MealPage());
+        }
+
+        private void btnSettings_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

@@ -13,7 +13,11 @@ namespace FoodTracker
 		{
 			InitializeComponent();
 
-			MainPage = new View.MainPage();
+            MainPage = new NavigationPage(new View.MainPage())
+            {
+                BarBackgroundColor = Color.Green,
+                BarTextColor = Color.White,
+            };
 		}
 
 		protected override void OnStart ()
