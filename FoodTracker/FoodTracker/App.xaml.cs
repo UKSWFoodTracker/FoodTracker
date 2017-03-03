@@ -16,7 +16,7 @@ namespace FoodTracker
             MainPage = new NavigationPage(new View.MainPage())
             {
                 BarBackgroundColor = Color.Green,
-                BarTextColor = Color.White,
+                BarTextColor = Color.FromHex("#27ae60"),
             };
 		}
 
