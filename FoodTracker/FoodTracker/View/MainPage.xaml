@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FoodTracker.View.MainPage"
+             Title="FoodTracker">
+
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <AbsoluteLayout Grid.Row="0" BackgroundColor="Lime">
+            <Label Text="AppName" 
+                   TextColor="White"
+                   FontAttributes="Bold" 
+                   FontSize="35" 
+                   AbsoluteLayout.LayoutBounds="0.5, 0" 
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
+        <Button x:Name="btnAddMeal" Grid.Row="1" Text="Add_Meal" Clicked="btnAddMeal_Clicked" />
+        <Button x:Name="btnSettings" Grid.Row="2" Text="Settings" Clicked="btnSettings_Clicked" />
+        <Label Grid.Row="3" Text="0:00:00" VerticalOptions="Center" HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>
