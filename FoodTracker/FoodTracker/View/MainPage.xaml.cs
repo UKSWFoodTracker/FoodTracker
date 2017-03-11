@@ -17,12 +17,15 @@ namespace FoodTracker.View
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)
         {
+            //pass reference to other class page if you want change displayed page
+            //example: await Navigation.PushAsync(new MainPage());
+            //don't forget type async before method
             await Navigation.PushAsync(new MealPage());
         }
 
-        private void btnSettings_Clicked(object sender, EventArgs e)
+        private async void btnSettings_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new SettingsPage());
         }
     }
 }
