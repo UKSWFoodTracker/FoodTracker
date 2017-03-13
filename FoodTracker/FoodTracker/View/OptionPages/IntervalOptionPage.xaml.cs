@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using FoodTracker.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.ComponentModel;
 
 namespace FoodTracker.View.OptionPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class IntervalOptionPage : ContentPage
-	{
+    {
         private VMSettings vmsets;
         string optName;
 
@@ -25,6 +26,7 @@ namespace FoodTracker.View.OptionPages
 
         private async void save_Clicked(object sender, EventArgs e)
         {
+            //need to considerate AM and PM
             TimeSpan reduce = new TimeSpan(12, 0, 0);
             if (picker.Time > reduce)
             {

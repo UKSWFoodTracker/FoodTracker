@@ -6,7 +6,7 @@ using Xamarin.Forms;
 namespace FoodTracker.Model
 {
     /*This class holds data for single setting witch is passing to list in View.SettingsPage*/
-    abstract class Option
+    public abstract class Option
     {
         public Option(string name, string pageToOpen)
         {

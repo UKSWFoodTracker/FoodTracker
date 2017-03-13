@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using FoodTracker.Model;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace FoodTracker.ViewModel
 {
@@ -21,22 +22,28 @@ namespace FoodTracker.ViewModel
             pagesToDisplay = new Dictionary<string, Page>();
             foreach (Option item in sets.GetOptions)
             {
-                vmoptions.Add(new VMOption(item.Name, item.Value));
-                switch (item.PageToOpen)
-                {
-                    case "IntervalOptionPage":
-                        pagesToDisplay.Add("IntervalOptionPage", new View.OptionPages.IntervalOptionPage(this, item.Name));
-                        break;
-                    default:
-                        break;
-                }
+                vmoptions.Add(new VMOption(item));
+                setPageForEachOption(item);
+            }
+        }
+
+        //connect the option with proper Page
+        private void setPageForEachOption(Option option)
+        {
+            switch (option.PageToOpen)
+            {
+                case "IntervalOptionPage":
+                    pagesToDisplay.Add("IntervalOptionPage", new View.OptionPages.IntervalOptionPage(this, option.Name));
+                    break;
+                default:
+                    break;
             }
         }
 
         public Page GetPageToDisplay(VMOption opt)
         {
             Page page = null;
-            foreach (Option item in sets.GetOptions)
+            foreach (VMOption item in vmoptions)
             {
                 if (item.Name == opt.Name)
                 {
@@ -48,13 +55,24 @@ namespace FoodTracker.ViewModel
 
         public void SetValue(string optName, string optValue)
         {
-            foreach (Option item in sets.GetOptions)
+            foreach (VMOption item in vmoptions)
             {
                 if (item.Name == optName)
                 {
                     item.Value = optValue;
                 }
             }
+            //OnPropertyChanged("VMOptions");
         }
+        
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //protected void OnPropertyChanged(string name)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null)
+        //    {
+        //        handler(this, new PropertyChangedEventArgs(name));
+        //    }
+        //}
     }
 }

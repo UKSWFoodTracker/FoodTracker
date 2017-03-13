@@ -14,9 +14,9 @@ namespace FoodTracker.Model.Options
             set => this.value = TimeSpan.Parse(value);  //string format: hh:mm
         }
 
-        public IntervalOption(string name, string pageToOpen) : base(name, pageToOpen)
+        public IntervalOption(string name, string pageToOpen, TimeSpan value) : base(name, pageToOpen)
         {
-            value = new TimeSpan(0, 1, 0);
+            this.value = value;
         }
     }
 }

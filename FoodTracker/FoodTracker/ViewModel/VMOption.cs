@@ -1,18 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace FoodTracker.ViewModel
 {
-    public class VMOption
+    public class VMOption : INotifyPropertyChanged
     {
-        public VMOption(string name, string value)
+        public VMOption(Model.Option option)
         {
-            Name = name;
-            Value = value;
+            this.option = option;
         }
+        private Model.Option option;
+        public string Name { get => option.Name; }
+        public string Value
+        {
+            get => option.Value;
+            set
+            {
+                option.Value = value;
+                OnPropertyChanged("Value");
+            }
+        }
+        public string PageToOpen { get => option.PageToOpen; }
 
-        public string Name { get; private set; }
-        public string Value { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
     }
 }
