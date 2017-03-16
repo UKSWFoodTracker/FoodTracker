@@ -19,7 +19,7 @@ namespace FoodTracker.View
 			InitializeComponent ();
 
             vmsets = new ViewModel.VMSettings();
-            listView.ItemsSource = vmsets.VMOptions;
+            //listView.ItemsSource = vmsets.VMOptions;
 		}
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -34,7 +34,7 @@ namespace FoodTracker.View
 
         private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            listView.SelectedItem = null;
+            //listView.SelectedItem = null;
         }
     }
 }
