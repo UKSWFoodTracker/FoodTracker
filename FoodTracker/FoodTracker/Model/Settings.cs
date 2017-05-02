@@ -11,7 +11,8 @@ namespace FoodTracker.Model
         {
             options = new List<Option>()
             {
-                new Options.IntervalOption("Interval", "IntervalOptionPage", new TimeSpan(0, 1, 0)),
+                new Options.IntervalOption("Interval", new TimeSpan(0, 1, 0)),
+                // TODO: ADDING NEW OPTIONS
             };
         }
         private List<Option> options;

@@ -8,16 +8,13 @@ namespace FoodTracker.Model
     /*This class holds data for single setting witch is passing to list in View.SettingsPage*/
     public abstract class Option
     {
-        public Option(string name, string pageToOpen)
+        public Option(string name)
         {
             Name = name;
-            PageToOpen = pageToOpen;
         }
 
         //properties uses to display value
         public string Name { get; private set; }
         public abstract string Value { get; set; }
-        
-        public string PageToOpen { get; private set; }
     }
 }

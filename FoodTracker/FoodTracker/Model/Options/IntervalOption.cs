@@ -7,16 +7,16 @@ namespace FoodTracker.Model.Options
 {
     class IntervalOption : Option
     {
+        public IntervalOption(string name, TimeSpan value) : base(name)
+        {
+            this.value = value;
+        }
+
         private TimeSpan value;
         public override string Value
         {
             get => value.ToString();
             set => this.value = TimeSpan.Parse(value);  //string format: hh:mm
-        }
-
-        public IntervalOption(string name, string pageToOpen, TimeSpan value) : base(name, pageToOpen)
-        {
-            this.value = value;
         }
     }
 }

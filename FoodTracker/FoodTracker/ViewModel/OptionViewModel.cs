@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FoodTracker.ViewModel
 {
-    public class VMOption : INotifyPropertyChanged
+    public class OptionViewModel : INotifyPropertyChanged
     {
-        public VMOption(Model.Option option)
+        public OptionViewModel(Model.Option option)
         {
             this.option = option;
         }
@@ -22,7 +22,6 @@ namespace FoodTracker.ViewModel
                 OnPropertyChanged("Value");
             }
         }
-        public string PageToOpen { get => option.PageToOpen; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)

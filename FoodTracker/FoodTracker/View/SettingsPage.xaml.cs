@@ -12,24 +12,24 @@ namespace FoodTracker.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
 	{
-        private VMSettings vmsets;
+        private SettingsViewModel vmsets;
 
         public SettingsPage ()
 		{
 			InitializeComponent ();
 
-            vmsets = new ViewModel.VMSettings();
+            vmsets = new ViewModel.SettingsViewModel();
             //listView.ItemsSource = vmsets.VMOptions;
 		}
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            VMOption opt = e.Item as VMOption;
-            Page toDisplay = vmsets.GetPageToDisplay(opt);
-            if (toDisplay != null)
-            {
-                await Navigation.PushAsync(toDisplay);
-            }
+            //OptionViewModel opt = e.Item as OptionViewModel;
+            //Page toDisplay = vmsets.GetPageToDisplay(opt);
+            //if (toDisplay != null)
+            //{
+            //    await Navigation.PushAsync(toDisplay);
+            //}
         }
 
         private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
