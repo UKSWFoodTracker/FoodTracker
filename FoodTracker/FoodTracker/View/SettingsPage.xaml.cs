@@ -9,32 +9,29 @@ using Xamarin.Forms.Xaml;
 
 namespace FoodTracker.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SettingsPage : ContentPage
-	{
-        private SettingsViewModel vmsets;
-
-        public SettingsPage ()
-		{
-			InitializeComponent ();
-
-            vmsets = new ViewModel.SettingsViewModel();
-            //listView.ItemsSource = vmsets.VMOptions;
-		}
-
-        private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SettingsPage : ContentPage
+    {
+        private SettingsViewModel settingsViewModel;
+        public SettingsPage()
         {
-            //OptionViewModel opt = e.Item as OptionViewModel;
-            //Page toDisplay = vmsets.GetPageToDisplay(opt);
-            //if (toDisplay != null)
-            //{
-            //    await Navigation.PushAsync(toDisplay);
-            //}
+            InitializeComponent();
+            if (Application.Current.Properties.ContainsKey("SettingsViewModel"))
+            {
+                settingsViewModel = Application.Current.Properties["SettingsViewModel"] as SettingsViewModel;
+            }
+            else
+            {
+                settingsViewModel = new SettingsViewModel();
+            }
+            BindingContext = settingsViewModel;
         }
 
-        private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        protected override void OnDisappearing()
         {
-            //listView.SelectedItem = null;
+            Application.Current.Properties["SettingsViewModel"] = settingsViewModel;
+            Application.Current.SavePropertiesAsync();
+            base.OnDisappearing();
         }
     }
 }

@@ -13,8 +13,8 @@ namespace FoodTracker.Model
             Name = name;
         }
 
-        //properties uses to display value
+        //properties using to display value
         public string Name { get; private set; }
-        public abstract string Value { get; set; }
+        public abstract string TimePeriod { get; set; }
     }
 }

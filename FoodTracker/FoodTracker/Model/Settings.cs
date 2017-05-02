@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FoodTracker.Model.Options;
 
 namespace FoodTracker.Model
 {
@@ -9,13 +10,20 @@ namespace FoodTracker.Model
     {
         public Settings()
         {
-            options = new List<Option>()
-            {
-                new Options.IntervalOption("Interval", new TimeSpan(0, 1, 0)),
-                // TODO: ADDING NEW OPTIONS
-            };
+            interval = new IntervalOption("Alarm interval", new TimeSpan(0, 1, 0));
+            // TODO: ADDING NEW OPTION: creating object
         }
-        private List<Option> options;
-        public List<Option> GetOptions { get { return options; } }
+        // Interval option properties
+        private IntervalOption interval;
+        public string IntervalName
+        {
+            get => interval.Name;
+        }
+        public string IntervalValue
+        {
+            get => interval.TimePeriod;
+            set => interval.TimePeriod = value;
+        }
+        // TODO: ADDING NEW OPTION: properties
     }
 }

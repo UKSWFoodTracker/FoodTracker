@@ -4,27 +4,13 @@
              x:Class="FoodTracker.View.SettingsPage"
              Title="Settings">
     <Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout Orientation="Horizontal" >
-            <Label Text="Interval: " Margin="20,0,20,0" VerticalOptions="Center"/>
-            <TimePicker x:Name="picker" />
-        </StackLayout>-->
-        <!--<ListView x:Name="listView" ItemTapped="listView_ItemTapped" ItemSelected="listView_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
         <TableView x:Name="tableView" Intent="Settings">
             <TableRoot>
                 <TableSection Title="Alarm">
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="13,0">
-                            <Label Text="Time interval" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <TimePicker Time="0:00" HorizontalOptions="EndAndExpand"/>
+                            <Label Text="{Binding IntervalName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
+                            <TimePicker Time="{Binding IntervalValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>

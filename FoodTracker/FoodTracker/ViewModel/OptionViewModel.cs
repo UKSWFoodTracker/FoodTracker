@@ -15,10 +15,10 @@ namespace FoodTracker.ViewModel
         public string Name { get => option.Name; }
         public string Value
         {
-            get => option.Value;
+            get => option.TimePeriod;
             set
             {
-                option.Value = value;
+                option.TimePeriod = value;
                 OnPropertyChanged("Value");
             }
         }

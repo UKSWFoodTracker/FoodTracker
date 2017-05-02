@@ -9,14 +9,14 @@ namespace FoodTracker.Model.Options
     {
         public IntervalOption(string name, TimeSpan value) : base(name)
         {
-            this.value = value;
+            this.timePeriod = value;
         }
 
-        private TimeSpan value;
-        public override string Value
+        private TimeSpan timePeriod;
+        public override string TimePeriod
         {
-            get => value.ToString();
-            set => this.value = TimeSpan.Parse(value);  //string format: hh:mm
+            get => timePeriod.ToString();
+            set => this.timePeriod = TimeSpan.Parse(value);  //string format: hh:mm
         }
     }
 }

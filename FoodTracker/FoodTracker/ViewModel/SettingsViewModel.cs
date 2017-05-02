@@ -10,31 +10,34 @@ namespace FoodTracker.ViewModel
 {
     public class SettingsViewModel
     {
-        private Settings sets;
-        // list to display in SettingsPage
-        private List<OptionViewModel> optionsViewModel;
-        // ...property
-        public List<OptionViewModel> OptionsViewModel { get { return optionsViewModel; } }
+        private Settings settings;
 
         public SettingsViewModel()
         {
-            sets = new Model.Settings();
-            optionsViewModel = new List<OptionViewModel>();
-            foreach (Option item in sets.GetOptions)
-            {
-                optionsViewModel.Add(new OptionViewModel(item));
-            }
+            settings = new Settings();
         }
 
-        public void SetValue(string optName, string optValue)
+        // Interval option properties
+        public string IntervalName
         {
-            foreach (OptionViewModel item in optionsViewModel)
+            get => settings.IntervalName;
+        }
+        public string IntervalValue
+        {
+            get => settings.IntervalValue;
+            set
             {
-                if (item.Name == optName)
-                {
-                    item.Value = optValue;
-                }
+                settings.IntervalValue = value;
+                OnPropertyChanged("IntervalValue");
             }
+        }
+        // TODO: ADDING NEW OPTION: properties for ModelView
+
+        //Data update method
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
