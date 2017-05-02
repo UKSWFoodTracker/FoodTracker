@@ -13,10 +13,10 @@ namespace FoodTracker.Model.Options
         }
 
         private TimeSpan timePeriod;
-        public override string TimePeriod
+        public TimeSpan TimePeriod
         {
-            get => timePeriod.ToString();
-            set => this.timePeriod = TimeSpan.Parse(value);  //string format: hh:mm
+            get => timePeriod;
+            set => timePeriod = value;
         }
     }
 }

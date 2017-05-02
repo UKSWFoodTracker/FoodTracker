@@ -10,7 +10,7 @@ namespace FoodTracker.Model
     {
         public Settings()
         {
-            interval = new IntervalOption("Alarm interval", new TimeSpan(0, 1, 0));
+            interval = new IntervalOption("Alarm interval", new TimeSpan(6, 0, 0));
             // TODO: ADDING NEW OPTION: creating object
         }
         // Interval option properties
@@ -19,7 +19,7 @@ namespace FoodTracker.Model
         {
             get => interval.Name;
         }
-        public string IntervalValue
+        public TimeSpan IntervalValue
         {
             get => interval.TimePeriod;
             set => interval.TimePeriod = value;

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace FoodTracker.Model
 {
-    /*This class holds data for single setting witch is passing to list in View.SettingsPage*/
+    /*This class holds data for single setting which is passing to list in View.SettingsPage*/
     public abstract class Option
     {
         public Option(string name)
@@ -15,6 +15,6 @@ namespace FoodTracker.Model
 
         //properties using to display value
         public string Name { get; private set; }
-        public abstract string TimePeriod { get; set; }
+        // Options have to have Value properties but that depends on needed type
     }
 }

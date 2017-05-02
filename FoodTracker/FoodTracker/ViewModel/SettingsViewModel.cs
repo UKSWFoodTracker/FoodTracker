@@ -22,7 +22,7 @@ namespace FoodTracker.ViewModel
         {
             get => settings.IntervalName;
         }
-        public string IntervalValue
+        public TimeSpan IntervalValue
         {
             get => settings.IntervalValue;
             set
