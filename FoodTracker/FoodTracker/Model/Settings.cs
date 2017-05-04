@@ -8,9 +8,9 @@ namespace FoodTracker.Model
     //Main class to manage options
     class Settings
     {
-        public Settings()
+        public Settings(TimeSpan alarmInterval)
         {
-            interval = new IntervalOption("Alarm interval", new TimeSpan(6, 0, 0));
+            interval = new IntervalOption("Alarm interval", alarmInterval);
             // TODO: ADDING NEW OPTION: creating object
         }
         // Interval option properties

@@ -1,4 +1,5 @@
 ﻿using FoodTracker.ViewModel;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +15,8 @@ namespace FoodTracker.View
             InitializeComponent();
 
             var app = Application.Current as App;
-            settingsViewModel = app.myProperties.SettingsViewModel;
+            TimeSpan alarmInterval = app.myProperties.IntervalTimeSpan;
+            settingsViewModel = new SettingsViewModel(alarmInterval);
             BindingContext = settingsViewModel;
         }
 

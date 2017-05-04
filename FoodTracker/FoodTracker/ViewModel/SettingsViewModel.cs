@@ -12,11 +12,13 @@ namespace FoodTracker.ViewModel
     {
         private Settings settings;
 
-        public SettingsViewModel()
+        // TODO: ADDING NEW OPTION: arguments for constructor
+        public SettingsViewModel(TimeSpan alarmInterval)
         {
-            settings = new Settings();
+            settings = new Settings(alarmInterval);
         }
 
+        // TODO: ADDING NEW OPTION: properties for ModelView
         // Interval option properties
         public string IntervalName
         {
@@ -28,10 +30,11 @@ namespace FoodTracker.ViewModel
             set
             {
                 settings.IntervalValue = value;
+                var app = Application.Current as App;
+                app.myProperties.IntervalTimeSpan = value;
                 OnPropertyChanged("IntervalValue");
             }
         }
-        // TODO: ADDING NEW OPTION: properties for ModelView
 
         //Data update method
         public event PropertyChangedEventHandler PropertyChanged;
