@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
+using FoodTracker.Model.AlarmClock.BroadCast;
 
 namespace FoodTracker.Droid
 {
@@ -19,6 +21,8 @@ namespace FoodTracker.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new FoodTracker.App ());
 		}
-	}
+
+        
+    }
 }
 
