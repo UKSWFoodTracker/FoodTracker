@@ -13,6 +13,9 @@
                             <TimePicker Time="{Binding IntervalValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                     </ViewCell>
+                    <ViewCell>
+                        <Button x:Name="btnNotifyTest" Text="test" Clicked="btnNotifyTest_Clicked"/>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>

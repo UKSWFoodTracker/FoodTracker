@@ -8,6 +8,8 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using FoodTracker.Model.AlarmClock.BroadCast;
+using FoodTracker.Model.AlarmClock;
+using FoodTracker.ViewModel;
 
 namespace FoodTracker.Droid
 {
@@ -20,9 +22,14 @@ namespace FoodTracker.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new FoodTracker.App ());
+
+            AlarmClockManager.NotificationEvent += AlarmClockManager_NotificationEvent;
 		}
 
-        
+        private void AlarmClockManager_NotificationEvent(bool isRepeating, TimeSpan interval)
+        {
+            AlarmClockManager.ShowNotification(this, isRepeating, interval);
+        }
     }
 }
 
