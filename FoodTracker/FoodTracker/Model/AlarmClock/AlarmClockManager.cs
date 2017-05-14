@@ -11,30 +11,29 @@ namespace FoodTracker.Model.AlarmClock
 {
     public static class AlarmClockManager
     {
-        public delegate void EventHandler(bool isRepeating, TimeSpan interval);
+        public delegate void EventHandler(bool isRepeating, int interval);
         public static event EventHandler NotificationEvent;
 
-        public static void OnNotificationEvent(bool isRepeating, TimeSpan interval)
+        public static void OnNotificationEvent(bool isRepeating, int interval)
         {
             NotificationEvent?.Invoke(isRepeating, interval);
         }
 
-        public static void ShowNotification(MainActivity main, bool isRepeating, TimeSpan interval)
+        public static void ShowNotification(MainActivity main, bool isRepeating, int interval)
         {
+            Context context = main as Context;
             AlarmManager manager = (AlarmManager)main.GetSystemService(Context.AlarmService);
-            Intent myIntent;
-            PendingIntent pendingIntent;
+            Intent myIntent =  new Intent(context, typeof(AlarmNotificationReceiver));
+            PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, myIntent, 0);
 
-            myIntent = new Intent(main, typeof(AlarmNotificationReceiver));
-            pendingIntent = PendingIntent.GetBroadcast(main, 0, myIntent, PendingIntentFlags.CancelCurrent);
-
+            long now = SystemClock.ElapsedRealtime();
             if (!isRepeating)
             {
-                manager.Set(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + 3000, pendingIntent);
+                manager.Set(AlarmType.ElapsedRealtimeWakeup, now + interval, pendingIntent);
             }
             else
             {
-                manager.SetRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + 3000, 60 * 1000, pendingIntent);
+                manager.SetRepeating(AlarmType.ElapsedRealtimeWakeup, now + interval, interval, pendingIntent);
             }
         }
     }

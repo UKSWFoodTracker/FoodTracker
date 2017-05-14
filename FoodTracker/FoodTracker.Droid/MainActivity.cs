@@ -26,7 +26,7 @@ namespace FoodTracker.Droid
             AlarmClockManager.NotificationEvent += AlarmClockManager_NotificationEvent;
 		}
 
-        private void AlarmClockManager_NotificationEvent(bool isRepeating, TimeSpan interval)
+        private void AlarmClockManager_NotificationEvent(bool isRepeating, int interval)
         {
             AlarmClockManager.ShowNotification(this, isRepeating, interval);
         }
