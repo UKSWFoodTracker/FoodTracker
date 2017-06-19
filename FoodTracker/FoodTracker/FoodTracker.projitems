@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Options\IntervalOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MyApplicationProperties.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>

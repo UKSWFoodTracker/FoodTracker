@@ -1,5 +1,5 @@
 ﻿using FoodTracker.Model.AlarmClock;
-using FoodTracker.ViewModel;
+using FoodTracker.Model;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,15 +9,16 @@ namespace FoodTracker.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private SettingsViewModel settingsViewModel;
+        private Settings settings;
 
         public SettingsPage()
         {
             InitializeComponent();
 
+            //Loading pop-up interval from saved properties
             TimeSpan alarmInterval = getInterval();
-            settingsViewModel = new SettingsViewModel(alarmInterval);
-            BindingContext = settingsViewModel;
+            settings = new Settings(alarmInterval);
+            BindingContext = settings;
         }
 
         protected async override void OnDisappearing()

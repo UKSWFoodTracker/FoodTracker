@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using FoodTracker.Model.Options;
+using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace FoodTracker.Model
 {
@@ -22,8 +24,21 @@ namespace FoodTracker.Model
         public TimeSpan IntervalValue
         {
             get => interval.TimePeriod;
-            set => interval.TimePeriod = value;
+            set
+            {
+                interval.TimePeriod = value;
+                var app = Application.Current as App;
+                app.myProperties.IntervalTimeSpan = value;
+                OnPropertyChanged("IntervalValue");
+            }
         }
         // TODO: ADDING NEW OPTION: properties
+
+        //Form update method and event
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
     }
 }

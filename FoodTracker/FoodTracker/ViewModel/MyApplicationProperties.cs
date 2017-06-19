@@ -6,6 +6,7 @@ using Xamarin.Forms;
 namespace FoodTracker.ViewModel
 {
 
+    //TODO: This class should not be in ViewModel layer
     public class MyApplicationProperties
     {
         //<summary>
