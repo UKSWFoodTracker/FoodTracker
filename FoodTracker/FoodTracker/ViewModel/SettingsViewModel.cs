@@ -8,6 +8,7 @@ using System.ComponentModel;
 
 namespace FoodTracker.ViewModel
 {
+    // Gather all options displayed in SettingsPage
     public class SettingsViewModel
     {
         private Settings settings;

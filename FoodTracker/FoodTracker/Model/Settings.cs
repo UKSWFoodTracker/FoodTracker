@@ -10,7 +10,7 @@ namespace FoodTracker.Model
     {
         public Settings(TimeSpan alarmInterval)
         {
-            interval = new IntervalOption("Alarm interval", alarmInterval);
+            interval = new IntervalOption("Pop-ups interval", alarmInterval);
             // TODO: ADDING NEW OPTION: creating object
         }
         // Interval option properties

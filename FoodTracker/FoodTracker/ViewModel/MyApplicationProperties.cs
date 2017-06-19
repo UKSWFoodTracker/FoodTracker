@@ -9,8 +9,9 @@ namespace FoodTracker.ViewModel
     public class MyApplicationProperties
     {
         //<summary>
+        //<para> It's usefull for gather all application properies in one class. 
         //<para> Thanks to this class I'm able to have cleaner more maintainable code in SettingsPage class. 
-        //<para> Also this class can be reached from every place of application because is nested in App class. 
+        //<para> Also this class can be easily reached from every place of application because is nested in App class. 
         //</summary>
 
         // Key which is stored in Application.Current.Properties dictionary
@@ -23,7 +24,7 @@ namespace FoodTracker.ViewModel
                 {
                     return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
                 }
-                // TODO: Return TimeSpan object from device's memory
+                // TODO: Return TimeSpan object from memory's device
                 Application.Current.Properties[IntervalTimeSpanKey] = new TimeSpan();
                 return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
             }

@@ -29,7 +29,7 @@ namespace FoodTracker.View
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {
             TimeSpan alarmInterval = getInterval();
-            AlarmClockManager.OnNotificationEvent(false, (int)alarmInterval.TotalMilliseconds);
+            AlarmClockManager.ShowNotification(false, (int)alarmInterval.TotalMilliseconds);
         }
 
         private TimeSpan getInterval()

@@ -9,20 +9,20 @@ using System.Text;
 
 namespace FoodTracker.Model.AlarmClock
 {
+    // Class serves to show notifications
     public static class AlarmClockManager
     {
-        public delegate void EventHandler(bool isRepeating, int interval);
-        public static event EventHandler NotificationEvent;
+        public static MainActivity Main;    //We need reference to MainActivity located in MainActivity.cs file
 
-        public static void OnNotificationEvent(bool isRepeating, int interval)
+        public static void ShowNotification(bool isRepeating, int interval)
         {
-            NotificationEvent?.Invoke(isRepeating, interval);
-        }
-
-        public static void ShowNotification(MainActivity main, bool isRepeating, int interval)
-        {
-            Context context = main as Context;
-            AlarmManager manager = (AlarmManager)main.GetSystemService(Context.AlarmService);
+            if (Main == null)
+            {
+                Console.WriteLine("Can't show notifications because of null in MainActivity.");
+                return;
+            }
+            Context context = Main as Context;
+            AlarmManager manager = (AlarmManager)Main.GetSystemService(Context.AlarmService);
             Intent myIntent =  new Intent(context, typeof(AlarmNotificationReceiver));
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, myIntent, 0);
 

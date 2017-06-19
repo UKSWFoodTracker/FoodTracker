@@ -23,13 +23,8 @@ namespace FoodTracker.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new FoodTracker.App ());
 
-            AlarmClockManager.NotificationEvent += AlarmClockManager_NotificationEvent;
+            AlarmClockManager.Main = this;
 		}
-
-        private void AlarmClockManager_NotificationEvent(bool isRepeating, int interval)
-        {
-            AlarmClockManager.ShowNotification(this, isRepeating, interval);
-        }
     }
 }
 
