@@ -18,7 +18,7 @@
 
         <StackLayout Grid.Row="1" Orientation="Vertical">
             <Label Text="Meals"/>
-            <ListView x:Name="lv_meals">
+            <ListView x:Name="lvMeals">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}"/>
