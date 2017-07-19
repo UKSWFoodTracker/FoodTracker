@@ -34,23 +34,34 @@ namespace FoodTracker.View
             base.OnAppearing();
         }
 
-        private void btn_add_Clicked(object sender, EventArgs e)
+        private async void btn_add_Clicked(object sender, EventArgs e)
         {
             var food = new Food { Name = "Food " + DateTime.Now.Ticks, Weight = _foods.Count };
 
-            _connection.InsertAsync(food);
+            await _connection.InsertAsync(food);
 
             _foods.Add(food);
         }
 
-        private void btn_update_Clicked(object sender, EventArgs e)
+        private async void btn_update_Clicked(object sender, EventArgs e)
         {
-
+            var food = _foods[0];
+            food.Name += " UPDATED";
+            await _connection.UpdateAsync(food);
         }
 
-        private void btn_delete_Clicked(object sender, EventArgs e)
+        private async void btn_delete_Clicked(object sender, EventArgs e)
         {
+            if (_foods.Count == 0)
+            {
+                return;
+            }
 
+            var food = _foods[0];
+
+            await _connection.DeleteAsync(food);
+
+            _foods.Remove(food);
         }
     }
 }
