@@ -10,14 +10,21 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" Orientation="Vertical">
-            <Label Text="Add ingredient" TextColor="#2c3e50" />
-        </StackLayout>
-        
-        <StackLayout Grid.Row="1" Orientation="Vertical">
-            <Label Text="Weight" TextColor="#2c3e50" />
+        <StackLayout Grid.Row="0" Orientation="Horizontal">
+            <Button Text="Add" x:Name="btn_add" Clicked="btn_add_Clicked"/>
+            <Button Text="Update" x:Name="btn_update" HorizontalOptions="CenterAndExpand" Clicked="btn_update_Clicked"/>
+            <Button Text="Delete" x:Name="btn_delete" Clicked="btn_delete_Clicked"/>
         </StackLayout>
 
-        <Button Grid.Row="2" Text="Add ingredient" BackgroundColor="#2c3e50" />
+        <StackLayout Grid.Row="1" Orientation="Vertical">
+            <Label Text="Meals"/>
+            <ListView x:Name="lv_meals">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </Grid>
 </ContentPage>
