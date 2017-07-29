@@ -15,8 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\AlarmClockManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\BroadCast\AlarmNotificationReceiver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\BroadCast\AlarmToastReceiver.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Food.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Meal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\IngredientType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Options\Option.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Options\IntervalOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
