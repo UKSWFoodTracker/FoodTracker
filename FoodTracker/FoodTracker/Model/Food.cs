@@ -11,7 +11,6 @@ namespace FoodTracker.Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
         private string _name;
         [MaxLength(255)]
         public string Name
@@ -30,7 +29,6 @@ namespace FoodTracker.Model
         }
 
         public int Weight { get; set; }
-
         //TODO: Should this event be in model layer?
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChange([CallerMemberName] string propertyName = null)
