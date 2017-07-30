@@ -23,7 +23,7 @@ namespace FoodTracker.Model
             type = _type;
         }
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int IngredientId { get; set; }
         private string name;
         [MaxLength(255)]
         public string Name
