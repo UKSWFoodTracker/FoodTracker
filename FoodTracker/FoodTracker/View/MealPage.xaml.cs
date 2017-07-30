@@ -36,6 +36,21 @@ namespace FoodTracker.View
 
         private async void btn_add_Clicked(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(entName.Text) || 
+                String.IsNullOrWhiteSpace(entName.Text))
+            {
+                return;
+            }
+            if (String.IsNullOrEmpty(entWeight.Text) ||
+                String.IsNullOrWhiteSpace(entWeight.Text))
+            {
+                return;
+            }
+            if (String.IsNullOrEmpty(entCalories.Text) ||
+                String.IsNullOrWhiteSpace(entCalories.Text))
+            {
+                return;
+            }
             int weight = int.Parse(entWeight.Text);
             int calories = int.Parse(entCalories.Text);
             //TODO: Add picker widget in MealPage
@@ -111,6 +126,12 @@ namespace FoodTracker.View
             entName.Text = name;
             entWeight.Text = weight;
             entCalories.Text = calories;
+        }
+
+        private void btnClear_Clicked(object sender, EventArgs e)
+        {
+            setEntries("", "", "");
+            lvIngreds.SelectedItem = null;
         }
     }
 }

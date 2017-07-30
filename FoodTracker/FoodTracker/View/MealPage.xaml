@@ -10,6 +10,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <StackLayout Grid.Row="0" Orientation="Horizontal">
@@ -28,8 +29,12 @@
             <Entry x:Name="entWeight" Placeholder="Weight" BackgroundColor="Gray" TextColor="Black" Grid.Column="1" />
             <Entry x:Name="entCalories" Placeholder="Calories per 100 g" BackgroundColor="Gray" TextColor="Black" Grid.Column="2" />
         </Grid>
+
+        <Grid Grid.Row="2">
+            <Button x:Name="btnClear" Text="Clear" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="btnClear_Clicked" />
+        </Grid>
         
-        <StackLayout Grid.Row="2" Orientation="Vertical">
+        <StackLayout Grid.Row="3" Orientation="Vertical">
             <Label Text="Ingredients"/>
             <ListView x:Name="lvIngreds" ItemSelected="lvIngreds_ItemSelected">
                 <ListView.ItemTemplate>
@@ -38,7 +43,7 @@
                             <StackLayout Orientation="Horizontal" Padding="13, 0">
                                 <Label Text="{Binding Name, StringFormat='Name: {0}'}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
                                 <Label Text="{Binding Weight, StringFormat='Weight: {0}'}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
-                                <Label Text="{Binding Calories100, StringFormat='Calories/100: {0}'}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                                <Label Text="{Binding Calories100, StringFormat='Calories/100g: {0}'}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
