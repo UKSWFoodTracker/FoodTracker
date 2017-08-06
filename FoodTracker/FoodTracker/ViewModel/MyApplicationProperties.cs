@@ -17,6 +17,9 @@ namespace FoodTracker.ViewModel
 
         // Key which is stored in Application.Current.Properties dictionary
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
+        private readonly string NotifyKey = "NotifyState";
+        private readonly string VibrateKey = "VibrateState";
+        //TODO: ADDING NEW OPTION: key & application properties
         public TimeSpan IntervalTimeSpan
         {
             get
@@ -32,6 +35,40 @@ namespace FoodTracker.ViewModel
             set
             {
                 Application.Current.Properties[IntervalTimeSpanKey] = value;
+            }
+        }
+        public bool NotifyState
+        {
+            get
+            {
+                if (Application.Current.Properties.ContainsKey(NotifyKey))
+                {
+                    return (bool)Application.Current.Properties[NotifyKey];
+                }
+                // TODO: Return TimeSpan object from memory's device
+                Application.Current.Properties[NotifyKey] = true;
+                return (bool)Application.Current.Properties[NotifyKey];
+            }
+            set
+            {
+                Application.Current.Properties[NotifyKey] = value;
+            }
+        }
+        public bool VibrateState
+        {
+            get
+            {
+                if (Application.Current.Properties.ContainsKey(VibrateKey))
+                {
+                    return (bool)Application.Current.Properties[VibrateKey];
+                }
+                // TODO: Return TimeSpan object from memory's device
+                Application.Current.Properties[VibrateKey] = true;
+                return (bool)Application.Current.Properties[VibrateKey];
+            }
+            set
+            {
+                Application.Current.Properties[VibrateKey] = value;
             }
         }
     }

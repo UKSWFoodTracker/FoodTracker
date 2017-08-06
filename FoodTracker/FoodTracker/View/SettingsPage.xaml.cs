@@ -17,8 +17,23 @@ namespace FoodTracker.View
 
             //Loading pop-up interval from saved properties
             TimeSpan alarmInterval = getInterval();
-            settings = new Settings(alarmInterval);
+            bool notifyState = getNotifyState();
+            bool vibrateState = getVibrateState();
+            settings = new Settings(alarmInterval, notifyState, vibrateState);
+            //TODO: ADDING NEW OPTION: Update 
             BindingContext = settings;
+        }
+
+        private bool getVibrateState()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.VibrateState;
+        }
+
+        private bool getNotifyState()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.NotifyState;
         }
 
         protected async override void OnDisappearing()
@@ -38,5 +53,6 @@ namespace FoodTracker.View
             var app = Application.Current as App;
             return app.myProperties.IntervalTimeSpan;
         }
+        //TODO: ADDING NEW OPTION: return options' value from application properties
     }
 }
