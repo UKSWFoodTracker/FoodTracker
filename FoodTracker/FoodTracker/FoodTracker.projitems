@@ -15,9 +15,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\AlarmClockManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\BroadCast\AlarmNotificationReceiver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\AlarmClock\BroadCast\AlarmToastReceiver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\DailyIngredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\DailyIntake.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\IngredientType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\MealType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Options\Option.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Options\IntervalOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ReflectionHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Persistence\ISQLiteDb.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MyApplicationProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
