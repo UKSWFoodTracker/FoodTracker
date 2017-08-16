@@ -7,14 +7,13 @@ namespace FoodTracker.ViewModel
 {
 
     //TODO: This class should not be in ViewModel layer
+    /// <summary>
+    /// It's usefull for gather all application properies in one class. 
+    /// Thanks to this class I'm able to have cleaner more maintainable code in SettingsPage class. 
+    /// Also this class can be easily reached from every place of application because is nested in App class.
+    /// </summary>
     public class MyApplicationProperties
     {
-        //<summary>
-        //<para> It's usefull for gather all application properies in one class. 
-        //<para> Thanks to this class I'm able to have cleaner more maintainable code in SettingsPage class. 
-        //<para> Also this class can be easily reached from every place of application because is nested in App class. 
-        //</summary>
-
         // Key which is stored in Application.Current.Properties dictionary
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
         private readonly string NotifyKey = "NotifyState";

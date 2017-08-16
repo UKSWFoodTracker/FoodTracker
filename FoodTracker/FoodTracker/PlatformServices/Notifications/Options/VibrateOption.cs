@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FoodTracker.Model.Options
+namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class NotifyOption : Option
+    class VibrateOption : Option
     {
-        public NotifyOption(string name, bool value) : base(name)
+        public VibrateOption(string name, bool value) : base(name)
         {
             onState = value;
         }
-        private bool onState;   // Określa czy notyfikacje mają być włączone lub nie
+        private bool onState;
         public bool OnState
         {
             get => onState;

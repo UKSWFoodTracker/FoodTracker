@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FoodTracker.Model.Options;
+using FoodTracker.PlatformServices.Notifications.Options;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;

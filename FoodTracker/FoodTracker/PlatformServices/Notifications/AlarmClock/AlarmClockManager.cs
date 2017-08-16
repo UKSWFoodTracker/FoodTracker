@@ -2,14 +2,15 @@
 using Android.Content;
 using Android.OS;
 using FoodTracker.Droid;
-using FoodTracker.Model.AlarmClock.BroadCast;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FoodTracker.Model.AlarmClock
+namespace FoodTracker.PlatformServices.Notifications.AlarmClock
 {
-    // Class serves to show notifications
+    /// <summary>
+    /// Class serves to show notifications
+    /// </summary>
     public static class AlarmClockManager
     {
         public static MainActivity Main;    //We need reference to MainActivity located in MainActivity.cs file

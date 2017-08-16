@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FoodTracker.Model.AlarmClock.BroadCast
+namespace FoodTracker.PlatformServices.Notifications.AlarmClock
 {
     [BroadcastReceiver(Enabled = true)]
     public class AlarmNotificationReceiver : BroadcastReceiver

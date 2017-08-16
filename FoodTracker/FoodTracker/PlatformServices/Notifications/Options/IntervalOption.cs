@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace FoodTracker.Model.Options
+namespace FoodTracker.PlatformServices.Notifications.Options
 {
     class IntervalOption : Option
     {

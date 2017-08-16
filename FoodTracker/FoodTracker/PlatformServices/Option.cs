@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace FoodTracker.Model
+namespace FoodTracker.PlatformServices
 {
     /*This class holds data for single setting which is passing to list in View.SettingsPage*/
     public abstract class Option
