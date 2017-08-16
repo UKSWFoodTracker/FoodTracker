@@ -1,4 +1,4 @@
-﻿using FoodTracker.Model.AlarmClock;
+﻿using FoodTracker.PlatformServices.Notifications.AlarmClock;
 using FoodTracker.Model;
 using System;
 using Xamarin.Forms;

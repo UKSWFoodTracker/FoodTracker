@@ -7,8 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
-using FoodTracker.Model.AlarmClock.BroadCast;
-using FoodTracker.Model.AlarmClock;
+using FoodTracker.PlatformServices.Notifications.AlarmClock;
 using FoodTracker.ViewModel;
 
 namespace FoodTracker.Droid
