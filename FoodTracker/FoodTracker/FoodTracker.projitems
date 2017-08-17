@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Ingredient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\IngredientType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\MealType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\NotifyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\NotifyOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Option.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\IntervalOption.cs" />
@@ -26,7 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\ReflectionHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\ISQLiteDb.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MyApplicationProperties.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Persistence\MyApplicationProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -65,6 +66,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)PlatformServices\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModel\" />
   </ItemGroup>
 </Project>

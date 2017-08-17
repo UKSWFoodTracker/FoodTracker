@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
-using FoodTracker.PlatformServices.Notifications.AlarmClock;
+using FoodTracker.PlatformServices.Notifications;
 using FoodTracker.ViewModel;
 
 namespace FoodTracker.Droid
@@ -22,7 +22,7 @@ namespace FoodTracker.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new FoodTracker.App ());
 
-            AlarmClockManager.Main = this;
+            NotifyManager.SetMainActivity(this);
 		}
     }
 }

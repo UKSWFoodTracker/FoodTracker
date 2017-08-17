@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace FoodTracker.Model
 {
     //Main class to manage options
-    class Settings
+    public class Settings
     {
         public Settings(TimeSpan alarmInterval, bool notifyState, bool vibrateState)
         {

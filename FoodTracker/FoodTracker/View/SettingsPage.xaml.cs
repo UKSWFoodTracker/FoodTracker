@@ -1,8 +1,8 @@
-﻿using FoodTracker.PlatformServices.Notifications.AlarmClock;
-using FoodTracker.Model;
+﻿using FoodTracker.Model;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using FoodTracker.PlatformServices.Notifications;
 
 namespace FoodTracker.View
 {
@@ -10,6 +10,7 @@ namespace FoodTracker.View
     public partial class SettingsPage : ContentPage
     {
         private Settings settings;
+        private NotifyManager notifyManager;
 
         public SettingsPage()
         {
@@ -21,6 +22,7 @@ namespace FoodTracker.View
             bool vibrateState = getVibrateState();
             settings = new Settings(alarmInterval, notifyState, vibrateState);
             //TODO: ADDING NEW OPTION: Update 
+            notifyManager = new NotifyManager(ref settings);
             BindingContext = settings;
         }
 
@@ -45,7 +47,9 @@ namespace FoodTracker.View
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {
             TimeSpan alarmInterval = getInterval();
-            AlarmClockManager.ShowNotification(false, (int)alarmInterval.TotalMilliseconds);
+            //TODO: Start alarm from NotificationManager class
+            //AlarmClockManager.ShowNotification(false, (int)alarmInterval.TotalMilliseconds);
+            notifyManager.StartNotification();
         }
 
         private TimeSpan getInterval()

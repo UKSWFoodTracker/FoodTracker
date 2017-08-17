@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class VibrateOption : Option
+    public class VibrateOption : Option
     {
         public VibrateOption(string name, bool value) : base(name)
         {

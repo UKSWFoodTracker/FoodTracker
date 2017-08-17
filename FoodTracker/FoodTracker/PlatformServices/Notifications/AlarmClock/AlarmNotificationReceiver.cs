@@ -6,25 +6,40 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FoodTracker.PlatformServices.Notifications.AlarmClock
+namespace FoodTracker.PlatformServices.Notifications
 {
-    [BroadcastReceiver(Enabled = true)]
-    public class AlarmNotificationReceiver : BroadcastReceiver
+    public partial class NotifyManager
     {
-        public override void OnReceive(Context context, Intent intent)
+        [BroadcastReceiver(Enabled = true)]
+        private class AlarmNotificationReceiver : BroadcastReceiver
         {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            private string _title;
+            public string Title { set { _title = value; } }
+            private string _text;
+            public string Text { set { _text = value; } }
+            private string _info;
+            public string Info { set { _info = value; } }
+            public AlarmNotificationReceiver()
+            {
+                _title = "Alarm Actived!";
+                _text = "THIS IS MY ALARM";
+                _info = "Info";
+            }
+            public override void OnReceive(Context context, Intent intent)
+            {
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
-            builder.SetAutoCancel(true)
-                .SetDefaults((int)NotificationDefaults.All)
-                .SetSmallIcon(Resource.Drawable.SymDefAppIcon)
-                .SetContentTitle("Alarm Actived!")
-                .SetContentText("THIS IS MY ALARM")
-                .SetContentInfo("Info");
+                builder.SetAutoCancel(true)
+                    .SetDefaults((int)NotificationDefaults.All)
+                    .SetSmallIcon(Resource.Drawable.SymDefAppIcon)
+                    .SetContentTitle(_title)
+                    .SetContentText(_text)
+                    .SetContentInfo(_info);
 
 
-            NotificationManager manager = (NotificationManager)context.GetSystemService(Context.NotificationService);
-            manager.Notify(1, builder.Build());
+                NotificationManager manager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+                manager.Notify(1, builder.Build());
+            }
         }
     }
 }
