@@ -26,6 +26,18 @@ namespace FoodTracker.View
             BindingContext = settings;
         }
 
+        protected async override void OnDisappearing()
+        {
+            await Application.Current.SavePropertiesAsync();
+            base.OnDisappearing();
+        }
+
+        private TimeSpan getInterval()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.IntervalTimeSpan;
+        }
+
         private bool getVibrateState()
         {
             var app = Application.Current as App;
@@ -38,24 +50,17 @@ namespace FoodTracker.View
             return app.myProperties.NotifyState;
         }
 
-        protected async override void OnDisappearing()
+        private void StopNotification(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            await Application.Current.SavePropertiesAsync();
-            base.OnDisappearing();
+            notifyManager.StartNotification();
         }
 
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {
-            TimeSpan alarmInterval = getInterval();
+            //TimeSpan alarmInterval = getInterval();
             //TODO: Start alarm from NotificationManager class
             //AlarmClockManager.ShowNotification(false, (int)alarmInterval.TotalMilliseconds);
             notifyManager.StartNotification();
-        }
-
-        private TimeSpan getInterval()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.IntervalTimeSpan;
         }
         //TODO: ADDING NEW OPTION: return options' value from application properties
     }

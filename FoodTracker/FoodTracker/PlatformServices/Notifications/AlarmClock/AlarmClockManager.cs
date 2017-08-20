@@ -39,6 +39,20 @@ namespace FoodTracker.PlatformServices.Notifications
                     manager.SetRepeating(AlarmType.ElapsedRealtimeWakeup, now + interval, interval, pendingIntent);
                 }
             }
+            public static void StopNotification()
+            {
+                if (Main == null)
+                {
+                    Console.WriteLine("Can't stop notifications because of null in MainActivity.");
+                    return;
+                }
+                Context context = Main as Context;
+                Intent myIntent = new Intent(context, typeof(AlarmNotificationReceiver));
+                PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, myIntent, 0);
+                AlarmManager manager = (AlarmManager)Main.GetSystemService(Context.AlarmService);
+
+                manager.Cancel(pendingIntent);
+            }
         }
     }
 }
