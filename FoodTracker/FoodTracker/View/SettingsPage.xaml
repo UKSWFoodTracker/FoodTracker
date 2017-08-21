@@ -16,7 +16,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="13,0">
                             <Label Text="{Binding NotifyName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <Switch IsToggled="{Binding NotifyValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand" PropertyChanged="StopNotification" />
+                            <Switch IsToggled="{Binding NotifyValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"  />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>

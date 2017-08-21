@@ -46,8 +46,12 @@ namespace FoodTracker.Model
             set
             {
                 notify.OnState = value;
+                // Saving in app properties
                 var app = Application.Current as App;
                 app.myProperties.NotifyState = value;
+                // Cancel notification request
+                OnStopRequest();
+
                 OnPropertyChanged();
             }
         }
@@ -69,11 +73,27 @@ namespace FoodTracker.Model
         }
         // TODO: ADDING NEW OPTION: properties
 
-        //Form update method and event
+        /// <summary>
+        /// Update specified value in form
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+        /// <summary>
+        /// Request to stop notifications
+        /// </summary>
+        public event StopRequestHandler StopRequestEvent;
+        public delegate void StopRequestHandler();
+        private void OnStopRequest()
+        {
+            StopRequestHandler stopRequest = StopRequestEvent;
+            if (stopRequest == null)
+            {
+                return;
+            }
+            stopRequest();
         }
     }
 }

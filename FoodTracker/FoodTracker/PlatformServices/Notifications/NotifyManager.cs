@@ -16,7 +16,9 @@ namespace FoodTracker.PlatformServices.Notifications
         public NotifyManager(ref Settings settings)
         {
             this.settings = settings;
+            settings.StopRequestEvent += StopNotification;
         }
+
         public static void SetMainActivity(MainActivity main)
         {
             AlarmClockManager.Main = main;
