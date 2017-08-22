@@ -25,7 +25,8 @@ namespace FoodTracker.PlatformServices.Notifications
         }
         public void StartNotification()
         {
-            AlarmClockManager.ShowNotification(true, (int)settings.IntervalValue.TotalMilliseconds);
+            TimeSpan interval = TimeSpan.Parse(settings.IntervalValue);
+            AlarmClockManager.ShowNotification(true, (int)interval.TotalMilliseconds);
         }
         public void StopNotification()
         {

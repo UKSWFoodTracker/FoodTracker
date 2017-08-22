@@ -24,14 +24,15 @@ namespace FoodTracker.Model
         {
             get => interval.Name;
         }
-        public TimeSpan IntervalValue
+        public string IntervalValue
         {
-            get => interval.TimePeriod;
+            get => String.Format("{0:hh\\:mm\\:ss}", interval.TimePeriod);
             set
             {
-                interval.TimePeriod = value;
+                TimeSpan timeValue = TimeSpan.Parse(value);
+                interval.TimePeriod = timeValue;
                 var app = Application.Current as App;
-                app.myProperties.IntervalTimeSpan = value;
+                app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
             }
         }
