@@ -3,65 +3,44 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FoodTracker.PlatformServices.Notifications;
+using FoodTracker.ViewModel;
 
 namespace FoodTracker.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private Settings settings;
-        private NotifyManager notifyManager;
+        private MainFeatures mainFeatures;
 
         public SettingsPage()
         {
             InitializeComponent();
 
-            //Loading pop-up interval from saved properties
-            TimeSpan alarmInterval = getInterval();
-            bool notifyState = getNotifyState();
-            bool vibrateState = getVibrateState();
-            settings = new Settings(alarmInterval, notifyState, vibrateState);
-            //TODO: ADDING NEW OPTION: Update 
-            notifyManager = new NotifyManager(ref settings);
-            BindingContext = settings;
+            mainFeatures = getMainFeaturesReference();
+
+            BindingContext = mainFeatures.settings;
+        }
+
+        private MainFeatures getMainFeaturesReference()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.MainFeatureReference;
         }
 
         protected async override void OnDisappearing()
         {
-            await Application.Current.SavePropertiesAsync();
+            await mainFeatures.SaveProperties();
             base.OnDisappearing();
-        }
-
-        private TimeSpan getInterval()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.IntervalTimeSpan;
-        }
-
-        private bool getVibrateState()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.VibrateState;
-        }
-
-        private bool getNotifyState()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.NotifyState;
         }
 
         private void StopNotification(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            notifyManager.StartNotification();
+            mainFeatures.notifyManager.StopNotification();
         }
 
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {
-            //TimeSpan alarmInterval = getInterval();
-            //TODO: Start alarm from NotificationManager class
-            //AlarmClockManager.ShowNotification(false, (int)alarmInterval.TotalMilliseconds);
-            notifyManager.StartNotification();
+            mainFeatures.notifyManager.StartNotification();
         }
-        //TODO: ADDING NEW OPTION: return options' value from application properties
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodTracker.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,19 @@ namespace FoodTracker.View
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage ()
+        MainFeatures mainFeatures;
+
+        public MainPage ()
 		{
 			InitializeComponent ();
-		}
+            mainFeatures = getMainFeaturesReference();
+        }
+
+        private MainFeatures getMainFeaturesReference()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.MainFeatureReference;
+        }
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)
         {

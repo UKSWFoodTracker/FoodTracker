@@ -11,11 +11,12 @@ namespace FoodTracker.Model
     //Main class to manage options
     public class Settings
     {
-        public Settings(TimeSpan alarmInterval, bool notifyState, bool vibrateState)
+        public Settings()
         {
-            interval = new IntervalOption("Pop-ups interval", alarmInterval);
-            notify = new NotifyOption("Notification", notifyState);
-            vibrate = new VibrateOption("Vibrate", vibrateState);
+            //Loading pop-up interval from saved properties
+            interval = new IntervalOption("Pop-ups interval", getInterval());
+            notify = new NotifyOption("Notification", getNotifyState());
+            vibrate = new VibrateOption("Vibrate", getVibrateState());
             // TODO: ADDING NEW OPTION: creating object
         }
         // Interval option properties
@@ -73,6 +74,25 @@ namespace FoodTracker.Model
             }
         }
         // TODO: ADDING NEW OPTION: properties
+
+        private TimeSpan getInterval()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.IntervalTimeSpan;
+        }
+
+        private bool getVibrateState()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.VibrateState;
+        }
+
+        private bool getNotifyState()
+        {
+            var app = Application.Current as App;
+            return app.myProperties.NotifyState;
+        }
+        //TODO: ADDING NEW OPTION: return options' value from application properties
 
         /// <summary>
         /// Update specified value in form
