@@ -16,13 +16,7 @@ namespace FoodTracker.View
         public MainPage ()
 		{
 			InitializeComponent ();
-            mainFeatures = getMainFeaturesReference();
-        }
-
-        private MainFeatures getMainFeaturesReference()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.MainFeatureReference;
+            mainFeatures = new MainFeatures();
         }
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)

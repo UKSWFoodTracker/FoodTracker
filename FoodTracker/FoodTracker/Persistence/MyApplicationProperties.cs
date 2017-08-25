@@ -15,28 +15,10 @@ namespace FoodTracker.ViewModel
     public class MyApplicationProperties
     {
         // Key which is stored in Application.Current.Properties dictionary
-        private readonly string MainFeatureReferenceKey = "MainFeatureReference";
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
         private readonly string NotifyKey = "NotifyState";
         private readonly string VibrateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
-        public MainFeatures MainFeatureReference
-        {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(MainFeatureReferenceKey))
-                {
-                    return (MainFeatures)Application.Current.Properties[MainFeatureReferenceKey];
-                }
-                // TODO: Return TimeSpan object from memory's device
-                Application.Current.Properties[MainFeatureReferenceKey] = new MainFeatures();
-                return (MainFeatures)Application.Current.Properties[MainFeatureReferenceKey];
-            }
-            set
-            {
-                Application.Current.Properties[MainFeatureReferenceKey] = value;
-            }
-        }
         public TimeSpan IntervalTimeSpan
         {
             get

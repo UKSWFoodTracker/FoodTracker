@@ -16,15 +16,9 @@ namespace FoodTracker.View
         {
             InitializeComponent();
 
-            mainFeatures = getMainFeaturesReference();
+            mainFeatures = new MainFeatures();
 
             BindingContext = mainFeatures.settings;
-        }
-
-        private MainFeatures getMainFeaturesReference()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.MainFeatureReference;
         }
 
         protected async override void OnDisappearing()
