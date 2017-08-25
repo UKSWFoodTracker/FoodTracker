@@ -5,8 +5,6 @@ using Xamarin.Forms;
 
 namespace FoodTracker.ViewModel
 {
-
-    //TODO: This class should not be in ViewModel layer
     /// <summary>
     /// It's usefull for gather all application properies in one class. 
     /// Thanks to this class I'm able to have cleaner more maintainable code in SettingsPage class. 
@@ -15,10 +13,27 @@ namespace FoodTracker.ViewModel
     public class MyApplicationProperties
     {
         // Key which is stored in Application.Current.Properties dictionary
+        private readonly string StartNotifyTimeKey = "StartNotifyTimeSpan";
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
         private readonly string NotifyKey = "NotifyState";
         private readonly string VibrateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
+        public TimeSpan StartNotifyTime
+        {
+            get
+            {
+                if (Application.Current.Properties.ContainsKey(StartNotifyTimeKey))
+                {
+                    return (TimeSpan)Application.Current.Properties[StartNotifyTimeKey];
+                }
+                Application.Current.Properties[StartNotifyTimeKey] = new TimeSpan();
+                return (TimeSpan)Application.Current.Properties[StartNotifyTimeKey];
+            }
+            set
+            {
+                Application.Current.Properties[StartNotifyTimeKey] = value;
+            }
+        }
         public TimeSpan IntervalTimeSpan
         {
             get
@@ -27,7 +42,6 @@ namespace FoodTracker.ViewModel
                 {
                     return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
                 }
-                // TODO: Return TimeSpan object from memory's device
                 Application.Current.Properties[IntervalTimeSpanKey] = new TimeSpan();
                 return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
             }
@@ -44,7 +58,6 @@ namespace FoodTracker.ViewModel
                 {
                     return (bool)Application.Current.Properties[NotifyKey];
                 }
-                // TODO: Return TimeSpan object from memory's device
                 Application.Current.Properties[NotifyKey] = true;
                 return (bool)Application.Current.Properties[NotifyKey];
             }
@@ -61,7 +74,6 @@ namespace FoodTracker.ViewModel
                 {
                     return (bool)Application.Current.Properties[VibrateKey];
                 }
-                // TODO: Return TimeSpan object from memory's device
                 Application.Current.Properties[VibrateKey] = true;
                 return (bool)Application.Current.Properties[VibrateKey];
             }

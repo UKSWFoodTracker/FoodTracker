@@ -10,8 +10,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="13,0">
                             <Label Text="{Binding IntervalName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <!--<TimePicker Time="{Binding IntervalValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"/>-->
-                            <Entry Placeholder="hh:mm:ss" Text="{Binding IntervalValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
+                            <Entry Placeholder="hh:mm:ss" Text="{Binding IntervalValueString, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
