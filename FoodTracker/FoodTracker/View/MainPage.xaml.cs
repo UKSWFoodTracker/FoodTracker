@@ -17,6 +17,8 @@ namespace FoodTracker.View
 		{
 			InitializeComponent ();
             mainFeatures = new MainFeatures();
+
+            lblTime.BindingContext = mainFeatures.notifyManager;
         }
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)

@@ -14,20 +14,32 @@ namespace FoodTracker.PlatformServices.Notifications
     public partial class NotifyManager
     {
         private Settings settings;
+        /// <summary>
+        /// Time which indicates the beginning of an interval
+        /// </summary>
+        private TimeSpan startNotifyTime;
+        /// <summary>
+        /// According to that time we substract and add times
+        /// </summary>
+        private DateTime zeroTime;
         public NotifyManager(ref Settings settings)
         {
             this.settings = settings;
+
+            startNotifyTime = getStartNotifyTime();
+
+            zeroTime = DateTime.Parse("01.01.2000");
+
             settings.StopRequestEvent += StopNotification;
         }
-        private TimeSpan startNotifyTime;
         /// <summary>
-        /// Time left to the end of next interval
+        /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
         public string IntervalEndTimeSpan
         {
             get
             {
-                TimeSpan time = startNotifyTime - (DateTime.Now - DateTime.Parse("01.01.2000"));
+                TimeSpan time = startNotifyTime - (DateTime.Now - zeroTime);
                 return String.Format("{0:hh\\:mm\\:ss}", time);
             }
         }
@@ -36,15 +48,20 @@ namespace FoodTracker.PlatformServices.Notifications
             var app = Application.Current as App;
             return app.myProperties.StartNotifyTime;
         }
+        private void setStartNotifyTime(ref TimeSpan time)
+        {
+            var app = Application.Current as App;
+            app.myProperties.StartNotifyTime = time;
+            startNotifyTime = time;
+        }
         public static void SetMainActivity(MainActivity main)
         {
             AlarmClockManager.Main = main;
         }
         public void StartNotification()
         {
-            startNotifyTime = settings.IntervalValueTimeSpan + (DateTime.Now - DateTime.Parse("01.01.2000"));
-            var app = Application.Current as App;
-            app.myProperties.StartNotifyTime = startNotifyTime;
+            startNotifyTime = settings.IntervalValueTimeSpan + (DateTime.Now - zeroTime);
+            setStartNotifyTime(ref startNotifyTime);
 
             TimeSpan interval = settings.IntervalValueTimeSpan;
             AlarmClockManager.ShowNotification(true, (int)interval.TotalMilliseconds);
