@@ -5,6 +5,7 @@ using FoodTracker.PlatformServices.Notifications.Options;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace FoodTracker.Model
 {
@@ -13,12 +14,18 @@ namespace FoodTracker.Model
     {
         public Settings()
         {
+            timerThread = new Thread(new ThreadStart(UpdateTimerProperty));
+
             //Loading pop-up interval from saved properties
             interval = new IntervalOption("Pop-ups interval", getInterval());
             notify = new NotifyOption("Notification", getNotifyState());
             vibrate = new VibrateOption("Vibrate", getVibrateState());
+            timer = new TimerOption("Timer");
             // TODO: ADDING NEW OPTION: creating object
+
+            timerThread.Start();
         }
+        private Thread timerThread;
         // Interval option properties
         private IntervalOption interval;
         public string IntervalName
@@ -83,6 +90,26 @@ namespace FoodTracker.Model
                 var app = Application.Current as App;
                 app.myProperties.VibrateState = value;
                 OnPropertyChanged();
+            }
+        }
+        private TimerOption timer;
+        public string TimerValue
+        {
+            get
+            {
+                return timer.HowMuchTimeLeft;
+            }
+        }
+        public void SetTimer()
+        {
+            timer.SetTimer(interval.TimePeriod);
+        }
+        private void UpdateTimerProperty()
+        {
+            while (true)
+            {
+                OnPropertyChanged("TimerValue");
+                Thread.Sleep(50);
             }
         }
         // TODO: ADDING NEW OPTION: properties

@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\MealType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\NotifyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\NotifyOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\TimerOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Option.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\IntervalOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\VibrateOption.cs" />
