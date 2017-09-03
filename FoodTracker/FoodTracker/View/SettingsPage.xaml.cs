@@ -10,15 +10,16 @@ namespace FoodTracker.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
+        private Settings _settings;
         private MainFeatures mainFeatures;
 
         public SettingsPage()
         {
             InitializeComponent();
 
-            mainFeatures = new MainFeatures();
+            mainFeatures = new MainFeatures(ref _settings);
 
-            BindingContext = mainFeatures.settings;
+            BindingContext = _settings;
         }
 
         protected async override void OnDisappearing()
