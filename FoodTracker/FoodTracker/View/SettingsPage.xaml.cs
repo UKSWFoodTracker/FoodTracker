@@ -22,7 +22,7 @@ namespace FoodTracker.View
             BindingContext = _settings;
         }
 
-        protected async override void OnDisappearing()
+        protected override async void OnDisappearing()
         {
             await mainFeatures.SaveProperties();
             base.OnDisappearing();

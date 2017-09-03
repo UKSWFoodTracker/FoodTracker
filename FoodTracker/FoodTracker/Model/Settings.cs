@@ -14,31 +14,31 @@ namespace FoodTracker.Model
     {
         public Settings()
         {
-            timerThread = new Thread(new ThreadStart(UpdateTimerProperty));
+            _timerThread = new Thread(UpdateTimerProperty);
 
             //Loading pop-up interval from saved properties
-            interval = new IntervalOption("Pop-ups interval", getInterval());
-            notify = new NotifyOption("Notification", getNotifyState());
-            vibrate = new VibrateOption("Vibrate", getVibrateState());
-            timer = new TimerOption("Timer");
+            _interval = new IntervalOption("Pop-ups interval", getInterval());
+            _notify = new NotifyOption("Notification", getNotifyState());
+            _vibrate = new VibrateOption("Vibrate", getVibrateState());
+            _timer = new TimerOption("Timer");
             // TODO: ADDING NEW OPTION: creating object
 
-            timerThread.Start();
+            _timerThread.Start();
         }
-        private Thread timerThread;
+        private readonly Thread _timerThread;
         // Interval option properties
-        private IntervalOption interval;
+        private IntervalOption _interval;
         public string IntervalName
         {
-            get => interval.Name;
+            get => _interval.Name;
         }
         public string IntervalValueString
         {
-            get => String.Format("{0:hh\\:mm\\:ss}", interval.TimePeriod);
+            get => String.Format("{0:hh\\:mm\\:ss}", _interval.TimePeriod);
             set
             {
                 TimeSpan timeValue = TimeSpan.Parse(value);
-                interval.TimePeriod = timeValue;
+                _interval.TimePeriod = timeValue;
                 var app = Application.Current as App;
                 app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
@@ -46,27 +46,27 @@ namespace FoodTracker.Model
         }
         public TimeSpan IntervalValueTimeSpan
         {
-            get => interval.TimePeriod;
+            get => _interval.TimePeriod;
             set
             {
                 TimeSpan timeValue = value;
-                interval.TimePeriod = timeValue;
+                _interval.TimePeriod = timeValue;
                 var app = Application.Current as App;
                 app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
             }
         }
-        private NotifyOption notify;
+        private NotifyOption _notify;
         public string NotifyName
         {
-            get => notify.Name;
+            get => _notify.Name;
         }
         public bool NotifyValue
         {
-            get => notify.OnState;
+            get => _notify.OnState;
             set
             {
-                notify.OnState = value;
+                _notify.OnState = value;
                 // Saving in app properties
                 var app = Application.Current as App;
                 app.myProperties.NotifyState = value;
@@ -76,33 +76,28 @@ namespace FoodTracker.Model
                 OnPropertyChanged();
             }
         }
-        private VibrateOption vibrate;
+        private VibrateOption _vibrate;
         public string VibrateName
         {
-            get => vibrate.Name;
+            get => _vibrate.Name;
         }
         public bool VibrateValue
         {
-            get => vibrate.OnState;
+            get => _vibrate.OnState;
             set
             {
-                vibrate.OnState = value;
+                _vibrate.OnState = value;
                 var app = Application.Current as App;
                 app.myProperties.VibrateState = value;
                 OnPropertyChanged();
             }
         }
-        private TimerOption timer;
-        public string TimerValue
-        {
-            get
-            {
-                return timer.HowMuchTimeLeft;
-            }
-        }
+        private readonly TimerOption _timer;
+        public string TimerValue => _timer.HowMuchTimeLeft;
+
         public void SetTimer()
         {
-            timer.SetTimer(interval.TimePeriod);
+            _timer.SetTimer(_interval.TimePeriod);
         }
         private void UpdateTimerProperty()
         {
@@ -149,11 +144,7 @@ namespace FoodTracker.Model
         private void OnStopRequest()
         {
             StopRequestHandler stopRequest = StopRequestEvent;
-            if (stopRequest == null)
-            {
-                return;
-            }
-            stopRequest();
+            stopRequest?.Invoke();
         }
     }
 }

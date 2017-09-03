@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
@@ -10,19 +7,20 @@ namespace FoodTracker.PlatformServices.Notifications.Options
     {
         public TimerOption(string name) : base(name)
         {
-            startNotifyTime = StartNotifyTimer;
+            //Get value from myProperties
+            _startNotifyTime = StartNotifyTimer;
 
-            zeroTime = DateTime.Parse("01.01.2000");
+            _zeroTime = DateTime.Parse("01.01.2000");
         }
         /// <summary>
         /// Time which indicates the beginning of an interval. 
         /// It means time when we start count down timer. 
         /// </summary>
-        private TimeSpan startNotifyTime;
+        private TimeSpan _startNotifyTime;
         /// <summary>
         /// According to that time we substract and add times
         /// </summary>
-        private DateTime zeroTime;
+        private readonly DateTime _zeroTime;
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
@@ -30,13 +28,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         {
             get
             {
-                TimeSpan time = startNotifyTime - (DateTime.Now - zeroTime);
+                TimeSpan time = _startNotifyTime - (DateTime.Now - _zeroTime);
                 return String.Format("{0:hh\\:mm\\:ss}", time);
             }
         }
         /// <summary>
         /// Property for startNotifyTime and it saves value to MyProperties class as well. 
-        /// <see cref="TimerOption.startNotifyTime"/> 
+        /// <see cref="_startNotifyTime"/> 
         /// </summary>
         private TimeSpan StartNotifyTimer
         {
@@ -49,14 +47,14 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             {
                 var app = Application.Current as App;
                 app.myProperties.StartNotifyTime = value;
-                startNotifyTime = value;
+                _startNotifyTime = value;
             }
         }
         public void SetTimer(TimeSpan intervalValue)
         {
             //Forecasting when timer goes off
-            startNotifyTime = intervalValue + (DateTime.Now - zeroTime);
-            StartNotifyTimer = startNotifyTime;
+            _startNotifyTime = intervalValue + (DateTime.Now - _zeroTime);
+            StartNotifyTimer = _startNotifyTime;
         }
     }
 }
