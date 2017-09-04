@@ -24,13 +24,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
-        public string HowMuchTimeLeft
+        public string HowMuchTimeLeft(TimeSpan intervalSpan)
         {
-            get
-            {
-                TimeSpan time = _startNotifyTime - (DateTime.Now - _zeroTime);
-                return String.Format("{0:hh\\:mm\\:ss}", time);
-            }
+            TimeSpan time = (_startNotifyTime + intervalSpan) - (DateTime.Now - _zeroTime);
+            return String.Format("{0:hh\\:mm\\:ss}", time);
         }
         /// <summary>
         /// Property for startNotifyTime and it saves value to MyProperties class as well. 

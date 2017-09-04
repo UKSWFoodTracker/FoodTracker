@@ -10,12 +10,10 @@ using System.Threading;
 namespace FoodTracker.ViewModel
 {
     //Main class to manage options
-    public class Settings
+    public class Settings :INotifyPropertyChanged
     {
         public Settings()
         {
-            _timerThread = new Thread(UpdateTimerProperty);
-
             //Loading pop-up interval from saved properties
             _interval = new IntervalOption("Pop-ups interval", getInterval());
             _notify = new NotifyOption("Notification", getNotifyState());
@@ -23,9 +21,9 @@ namespace FoodTracker.ViewModel
             _timer = new TimerOption("Timer");
             // TODO: ADDING NEW OPTION: creating object
 
-            _timerThread.Start();
+            _updateTimerThread = new UpdateTimerThread(OnPropertyChanged);
         }
-        private readonly Thread _timerThread;
+        private UpdateTimerThread _updateTimerThread;
         // Interval option properties
         private IntervalOption _interval;
         public string IntervalName
@@ -93,19 +91,11 @@ namespace FoodTracker.ViewModel
             }
         }
         private readonly TimerOption _timer;
-        public string TimerValue => _timer.HowMuchTimeLeft;
+        public string TimerValue => _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
 
         public void SetTimer()
         {
             _timer.SetTimer(_interval.TimePeriod);
-        }
-        private void UpdateTimerProperty()
-        {
-            while (true)
-            {
-                OnPropertyChanged("TimerValue");
-                Thread.Sleep(50);
-            }
         }
         // TODO: ADDING NEW OPTION: properties
 
