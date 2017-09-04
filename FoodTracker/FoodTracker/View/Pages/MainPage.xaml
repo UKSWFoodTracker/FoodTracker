@@ -22,6 +22,11 @@
         </AbsoluteLayout>
         <Button x:Name="btnAddMeal" Grid.Row="1" Text="Add_Meal" Clicked="btnAddMeal_Clicked" BackgroundColor="#2c3e50" />
         <Button x:Name="btnSettings" Grid.Row="2" Text="Settings" Clicked="btnSettings_Clicked" BackgroundColor="#2c3e50" />
-        <Label x:Name="lblTime" Grid.Row="3" Text="Time left: 0:00:00" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Label x:Name="lblTime" Grid.Row="3" 
+               Text="{Binding TimerValue, Mode=OneWay, StringFormat='Time left: {0}'}" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" 
+               TextColor="White"
+               FontSize="30"/>
     </Grid>
 </ContentPage>

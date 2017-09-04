@@ -15,7 +15,7 @@ namespace FoodTracker.View
             _settings = new Settings();
 		    _mainFeatures = new MainFeatures(ref _settings);
 
-            lblTime.BindingContext = _mainFeatures.NotifyManager;
+            lblTime.BindingContext = _settings;
         }
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)

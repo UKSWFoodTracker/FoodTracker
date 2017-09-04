@@ -26,7 +26,7 @@
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
-                        <Button x:Name="btnNotifyTest" Text="{Binding IntervalEndTimeSpan, Mode=OneWay, StringFormat='Time left: {0}'}" Clicked="btnNotifyTest_Clicked"/>
+                        <Button x:Name="btnNotifyTest" Text="Test" Clicked="btnNotifyTest_Clicked"/>
                     </ViewCell>
                 </TableSection>
             </TableRoot>
