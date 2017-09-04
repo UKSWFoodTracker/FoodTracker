@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FoodTracker.PlatformServices.Notifications.Options;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace FoodTracker.ViewModel
 {
@@ -18,14 +15,14 @@ namespace FoodTracker.ViewModel
             _interval = new IntervalOption("Pop-ups interval", getInterval());
             _notify = new NotifyOption("Notification", getNotifyState());
             _vibrate = new VibrateOption("Vibrate", getVibrateState());
-            _timer = new TimerOption("Timer");
+            _timer = new TimerOption("Timer", _interval.TimePeriod);
             // TODO: ADDING NEW OPTION: creating object
 
             _updateTimerValue = new UpdateTimerValue(OnPropertyChanged);
         }
         private UpdateTimerValue _updateTimerValue;
         // Interval option properties
-        private IntervalOption _interval;
+        private readonly IntervalOption _interval;
         public string IntervalName
         {
             get => _interval.Name;
@@ -74,7 +71,7 @@ namespace FoodTracker.ViewModel
                 OnPropertyChanged();
             }
         }
-        private VibrateOption _vibrate;
+        private readonly VibrateOption _vibrate;
         public string VibrateName
         {
             get => _vibrate.Name;
@@ -95,7 +92,7 @@ namespace FoodTracker.ViewModel
 
         public void SetTimer()
         {
-            _timer.SetTimer(_interval.TimePeriod);
+            _timer.SetTimer();
         }
         // TODO: ADDING NEW OPTION: properties
 

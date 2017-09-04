@@ -2,9 +2,6 @@
 using Android.App;
 using Android.Content;
 using Android.Support.V7.App;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodTracker.PlatformServices.Notifications
 {
@@ -13,12 +10,10 @@ namespace FoodTracker.PlatformServices.Notifications
         [BroadcastReceiver(Enabled = true)]
         private class AlarmNotificationReceiver : BroadcastReceiver
         {
-            private string _title;
-            public string Title { set { _title = value; } }
-            private string _text;
-            public string Text { set { _text = value; } }
-            private string _info;
-            public string Info { set { _info = value; } }
+            private readonly string _title;
+            private readonly string _text;
+            private readonly string _info;
+
             public AlarmNotificationReceiver()
             {
                 _title = "Alarm Actived!";
