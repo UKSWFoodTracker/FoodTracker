@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-namespace FoodTracker.Model
+namespace FoodTracker.ViewModel
 {
     //Main class to manage options
     public class Settings

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Threading;
-using System.Collections.Generic;
-using System.Text;
-using FoodTracker.Model;
+using FoodTracker.ViewModel;
 using FoodTracker.Droid;
-using FoodTracker.PlatformServices.Notifications.Options;
-using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications
 {
@@ -14,10 +9,10 @@ namespace FoodTracker.PlatformServices.Notifications
     /// </summary>
     public partial class NotifyManager
     {
-        private Settings settings;
+        private Settings _settings;
         public NotifyManager(ref Settings settings)
         {
-            this.settings = settings;
+            _settings = settings;
 
             settings.StopRequestEvent += StopNotification;
         }
@@ -27,14 +22,14 @@ namespace FoodTracker.PlatformServices.Notifications
         }
         public void StartNotification()
         {
-            settings.SetTimer();
+            _settings.SetTimer();
 
-            TimeSpan interval = settings.IntervalValueTimeSpan;
+            TimeSpan interval = _settings.IntervalValueTimeSpan;
             AlarmClockManager.ShowNotification(true, (int)interval.TotalMilliseconds);
         }
         public void StopNotification()
         {
-            if (!settings.NotifyValue)
+            if (!_settings.NotifyValue)
             {
                 AlarmClockManager.StopNotification();
             }
