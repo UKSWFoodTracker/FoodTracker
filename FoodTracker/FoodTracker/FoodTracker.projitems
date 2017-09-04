@@ -30,7 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\ISQLiteDb.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\MyApplicationProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainFeatures.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\UpdateTimerThread.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\UpdateTimerValue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>

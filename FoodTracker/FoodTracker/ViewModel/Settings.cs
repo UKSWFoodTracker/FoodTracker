@@ -21,9 +21,9 @@ namespace FoodTracker.ViewModel
             _timer = new TimerOption("Timer");
             // TODO: ADDING NEW OPTION: creating object
 
-            _updateTimerThread = new UpdateTimerThread(OnPropertyChanged);
+            _updateTimerValue = new UpdateTimerValue(OnPropertyChanged);
         }
-        private UpdateTimerThread _updateTimerThread;
+        private UpdateTimerValue _updateTimerValue;
         // Interval option properties
         private IntervalOption _interval;
         public string IntervalName
