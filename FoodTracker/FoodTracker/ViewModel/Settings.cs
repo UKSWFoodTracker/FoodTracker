@@ -88,7 +88,16 @@ namespace FoodTracker.ViewModel
             }
         }
         private readonly TimerOption _timer;
-        public string TimerValue => _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
+        public string TimerValue {
+            get
+            {
+                if (!NotifyValue)
+                {
+                    return "Interval off";
+                }
+                return _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
+            }
+        }
 
         public void SetTimer()
         {
