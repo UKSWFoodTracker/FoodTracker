@@ -9,30 +9,22 @@ namespace FoodTracker.PlatformServices.Notifications
     /// </summary>
     public partial class NotifyManager
     {
-        private Settings _settings;
-        public NotifyManager(ref Settings settings)
+        public NotifyManager()
         {
-            _settings = settings;
-
-            settings.StopRequestEvent += StopNotification;
+            Settings.StopRequestEvent += StopNotification;
+            Settings.StartRequestEvent += StartNotification;
         }
         public static void SetMainActivity(MainActivity main)
         {
             AlarmClockManager.Main = main;
         }
-        public void StartNotification()
+        public void StartNotification(int intervalTotalMiliseconds)
         {
-            _settings.SetTimer();
-
-            TimeSpan interval = _settings.IntervalValueTimeSpan;
-            AlarmClockManager.ShowNotification(true, (int)interval.TotalMilliseconds);
+            AlarmClockManager.ShowNotification(true, intervalTotalMiliseconds);
         }
         public void StopNotification()
         {
-            if (!_settings.NotifyValue)
-            {
-                AlarmClockManager.StopNotification();
-            }
+            AlarmClockManager.StopNotification();
         }
     }
 }

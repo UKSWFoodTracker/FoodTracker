@@ -9,9 +9,9 @@ namespace FoodTracker.ViewModel
     {
         private NotifyManager _notifyManager;
         public NotifyManager NotifyManager => _notifyManager;
-        public MainFeatures(ref Settings settings)
+        public MainFeatures()
         {
-            _notifyManager = new NotifyManager(ref settings);
+            _notifyManager = new NotifyManager();
         }
         public async Task SaveProperties()
         {

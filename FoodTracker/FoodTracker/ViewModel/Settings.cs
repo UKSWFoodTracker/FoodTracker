@@ -66,11 +66,20 @@ namespace FoodTracker.ViewModel
                 var app = Application.Current as App;
                 app.myProperties.NotifyState = value;
                 // Cancel notification request
-                OnStopRequest();
+                if (value)
+                {
+                    OnStopRequest();
+                }
+                else
+                {
+                    OnStartRequest();
+                    _timer.SetTimer();
+                }
 
                 OnPropertyChanged();
             }
         }
+
         private readonly VibrateOption _vibrate;
         public string VibrateName
         {
@@ -97,11 +106,6 @@ namespace FoodTracker.ViewModel
                 }
                 return _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
             }
-        }
-
-        public void SetTimer()
-        {
-            _timer.SetTimer();
         }
         // TODO: ADDING NEW OPTION: properties
 
@@ -132,15 +136,24 @@ namespace FoodTracker.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
         /// <summary>
         /// Request to stop notifications
         /// </summary>
-        public event StopRequestHandler StopRequestEvent;
-        public delegate void StopRequestHandler();
+        public static event StartRequestHandler StartRequestEvent;
+        public delegate void StartRequestHandler(int intervalTotalMiliseconds);
         private void OnStopRequest()
         {
-            StopRequestHandler stopRequest = StopRequestEvent;
-            stopRequest?.Invoke();
+            StartRequestHandler request = StartRequestEvent;
+            request?.Invoke((int)IntervalValueTimeSpan.TotalMilliseconds);
+        }
+
+        public static event StopRequestHandler StopRequestEvent;
+        public delegate void StopRequestHandler();
+        private void OnStartRequest()
+        {
+            StopRequestHandler request = StopRequestEvent;
+            request?.Invoke();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FoodTracker.View
 		{
 			InitializeComponent ();
             _settings = new Settings();
-		    _mainFeatures = new MainFeatures(ref _settings);
+		    _mainFeatures = new MainFeatures();
 
             lblTime.BindingContext = _settings;
         }

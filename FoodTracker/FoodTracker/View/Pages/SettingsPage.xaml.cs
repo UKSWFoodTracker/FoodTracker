@@ -8,8 +8,8 @@ namespace FoodTracker.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private Settings _settings;
-        private MainFeatures _mainFeatures;
+        private readonly Settings _settings;
+        private readonly MainFeatures _mainFeatures;
 
         public SettingsPage(ref Settings settings, ref MainFeatures mainFeatures)
         {
@@ -34,7 +34,8 @@ namespace FoodTracker.View
 
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {
-            _mainFeatures.NotifyManager.StartNotification();
+            int totalMiliseconds = (int) _settings.IntervalValueTimeSpan.TotalMilliseconds;
+            _mainFeatures.NotifyManager.StartNotification(totalMiliseconds);
         }
     }
 }
