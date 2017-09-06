@@ -16,6 +16,8 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             _userInterval = userInterval;
         }
 
+        public bool IsActive { get; private set; }
+
         /// <summary>
         /// Reference to <seealso cref="IntervalOption.TimePeriod"/>
         /// </summary>
@@ -46,6 +48,11 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             if (time <= _zeroTime)
             {
                 SetTimer();
+                IsActive = false;
+            }
+            else
+            {
+                IsActive = true;
             }
             return String.Format("{0:hh\\:mm\\:ss}", time);
         }

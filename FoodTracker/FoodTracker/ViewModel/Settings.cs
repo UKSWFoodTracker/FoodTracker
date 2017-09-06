@@ -97,6 +97,7 @@ namespace FoodTracker.ViewModel
             }
         }
         private readonly TimerOption _timer;
+
         public string TimerValue {
             get
             {
@@ -107,6 +108,8 @@ namespace FoodTracker.ViewModel
                 return _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
             }
         }
+
+        public bool TimerIsActive => _timer.IsActive;
         // TODO: ADDING NEW OPTION: properties
 
         private TimeSpan getInterval()

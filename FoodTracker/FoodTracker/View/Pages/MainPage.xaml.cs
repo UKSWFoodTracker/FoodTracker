@@ -14,6 +14,7 @@ namespace FoodTracker.View
 			InitializeComponent ();
             _settings = new Settings();
 		    _mainFeatures = new MainFeatures();
+            SetTimerSwitchText();
 
             lblTime.BindingContext = _settings;
         }
@@ -33,5 +34,33 @@ namespace FoodTracker.View
             var settingsPage = new SettingsPage(ref _settings, ref _mainFeatures);
             await Navigation.PushAsync(settingsPage);
         }
-    }
+
+	    private void BtnTimerSwitch_OnClicked(object sender, EventArgs e)
+	    {
+	        if (!_settings.TimerIsActive)
+	        {
+                // Start notifications
+	            int totalMiliseconds = (int)_settings.IntervalValueTimeSpan.TotalMilliseconds;
+	            _mainFeatures.NotifyManager.StartNotification(totalMiliseconds);
+            }
+	        else
+	        {
+                // Stop notifications
+                _mainFeatures.NotifyManager.StopNotification();
+	        }
+            SetTimerSwitchText();
+        }
+
+	    private void SetTimerSwitchText()
+	    {
+	        if (!_settings.TimerIsActive)
+	        {
+	            btnTimerSwitch.Text = "Off";
+            }
+	        else
+	        {
+	            btnTimerSwitch.Text = "On";
+            }
+	    }
+	}
 }

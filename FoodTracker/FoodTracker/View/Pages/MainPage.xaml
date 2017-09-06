@@ -20,13 +20,27 @@
                    AbsoluteLayout.LayoutBounds="0.5, 0" 
                    AbsoluteLayout.LayoutFlags="PositionProportional" />
         </AbsoluteLayout>
-        <Button x:Name="btnAddMeal" Grid.Row="1" Text="Add_Meal" Clicked="btnAddMeal_Clicked" BackgroundColor="#2c3e50" />
-        <Button x:Name="btnSettings" Grid.Row="2" Text="Settings" Clicked="btnSettings_Clicked" BackgroundColor="#2c3e50" />
+        <Button x:Name="btnAddMeal" 
+                Grid.Row="1" 
+                Text="Add_Meal" 
+                Clicked="btnAddMeal_Clicked" 
+                BackgroundColor="#2c3e50" />
+        <Button x:Name="btnSettings" 
+                Grid.Row="2" 
+                Text="Settings" 
+                Clicked="btnSettings_Clicked" 
+                BackgroundColor="#2c3e50" />
         <Label x:Name="lblTime" Grid.Row="3" 
                Text="{Binding TimerValue, Mode=OneWay, StringFormat='Time left: {0}'}" 
                VerticalOptions="Center" 
                HorizontalOptions="Center" 
                TextColor="White"
                FontSize="30"/>
+        <Button x:Name="btnTimerSwitch" 
+                Text="On/Off Notifications" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="30"
+                Clicked="BtnTimerSwitch_OnClicked"/>
     </Grid>
 </ContentPage>
