@@ -5,18 +5,17 @@ using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class IntervalOption : Option
+    class IntervalOption : Option<TimeSpan>
     {
-        public IntervalOption(string name, TimeSpan value) : base(name)
+        public IntervalOption(string name) : base(name)
         {
-            this.timePeriod = value;
+            Value = GetFromMyProperties();
         }
 
-        private TimeSpan timePeriod;
-        public TimeSpan TimePeriod
+        protected sealed override TimeSpan GetFromMyProperties()
         {
-            get => timePeriod;
-            set => timePeriod = value;
+            var app = Application.Current as App;
+            return app.myProperties.IntervalTimeSpan;
         }
     }
 }

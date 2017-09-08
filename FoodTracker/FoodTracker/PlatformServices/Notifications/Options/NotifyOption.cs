@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class NotifyOption : Option
+    class NotifyOption : Option<bool>
     {
-        public NotifyOption(string name, bool value) : base(name)
+        public NotifyOption(string name) : base(name)
         {
-            onState = value;
+            Value = GetFromMyProperties();
         }
-        private bool onState;   // Określa czy notyfikacje mają być włączone lub nie
-        public bool OnState
+
+        protected sealed override bool GetFromMyProperties()
         {
-            get => onState;
-            set => onState = value;
+            var app = Application.Current as App;
+            return app.myProperties.NotifyState;
         }
     }
 }

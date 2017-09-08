@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    public class VibrateOption : Option
+    public class VibrateOption : Option<bool>
     {
-        public VibrateOption(string name, bool value) : base(name)
+        public VibrateOption(string name) : base(name)
         {
-            onState = value;
+            Value = GetFromMyProperties();
         }
-        private bool onState;
-        public bool OnState
+
+        protected sealed override bool GetFromMyProperties()
         {
-            get => onState;
-            set => onState = value;
+            var app = Application.Current as App;
+            return app.myProperties.VibrateState;
         }
     }
 }

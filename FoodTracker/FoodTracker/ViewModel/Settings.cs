@@ -12,10 +12,10 @@ namespace FoodTracker.ViewModel
         public Settings()
         {
             //Loading pop-up interval from saved properties
-            _interval = new IntervalOption("Pop-ups interval", getInterval());
-            _notify = new NotifyOption("Notification", getNotifyState());
-            _vibrate = new VibrateOption("Vibrate", getVibrateState());
-            _timer = new TimerOption("Timer", _interval.TimePeriod);
+            _interval = new IntervalOption("Pop-ups interval");
+            _notify = new NotifyOption("Notification");
+            _vibrate = new VibrateOption("Vibrate");
+            _timer = new TimerOption("Timer", _interval.Value);
             // TODO: ADDING NEW OPTION: creating object
 
             _updateTimerValue = new UpdateTimerValue(OnPropertyChanged);
@@ -29,11 +29,11 @@ namespace FoodTracker.ViewModel
         }
         public string IntervalValueString
         {
-            get => String.Format("{0:hh\\:mm\\:ss}", _interval.TimePeriod);
+            get => String.Format("{0:hh\\:mm\\:ss}", _interval.Value);
             set
             {
                 TimeSpan timeValue = TimeSpan.Parse(value);
-                _interval.TimePeriod = timeValue;
+                _interval.Value = timeValue;
                 var app = Application.Current as App;
                 app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
@@ -41,11 +41,11 @@ namespace FoodTracker.ViewModel
         }
         public TimeSpan IntervalValueTimeSpan
         {
-            get => _interval.TimePeriod;
+            get => _interval.Value;
             set
             {
                 TimeSpan timeValue = value;
-                _interval.TimePeriod = timeValue;
+                _interval.Value = timeValue;
                 var app = Application.Current as App;
                 app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
@@ -58,10 +58,10 @@ namespace FoodTracker.ViewModel
         }
         public bool NotifyValue
         {
-            get => _notify.OnState;
+            get => _notify.Value;
             set
             {
-                _notify.OnState = value;
+                _notify.Value = value;
                 // Saving in app properties
                 var app = Application.Current as App;
                 app.myProperties.NotifyState = value;
@@ -85,7 +85,7 @@ namespace FoodTracker.ViewModel
             get
             {
                 OnPropertyChanged();
-                return !_notify.OnState ? "On" : "Off";
+                return !_notify.Value ? "On" : "Off";
             }
         }
 
@@ -96,10 +96,10 @@ namespace FoodTracker.ViewModel
         }
         public bool VibrateValue
         {
-            get => _vibrate.OnState;
+            get => _vibrate.Value;
             set
             {
-                _vibrate.OnState = value;
+                _vibrate.Value = value;
                 var app = Application.Current as App;
                 app.myProperties.VibrateState = value;
                 OnPropertyChanged();
@@ -118,25 +118,6 @@ namespace FoodTracker.ViewModel
             }
         }
         // TODO: ADDING NEW OPTION: properties
-
-        private TimeSpan getInterval()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.IntervalTimeSpan;
-        }
-
-        private bool getVibrateState()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.VibrateState;
-        }
-
-        private bool getNotifyState()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.NotifyState;
-        }
-        //TODO: ADDING NEW OPTION: return options' value from application properties
 
         /// <summary>
         /// Update specified value in form
