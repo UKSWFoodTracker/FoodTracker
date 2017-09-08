@@ -80,6 +80,15 @@ namespace FoodTracker.ViewModel
             }
         }
 
+        public string NotifyButton
+        {
+            get
+            {
+                OnPropertyChanged();
+                return !_notify.OnState ? "On" : "Off";
+            }
+        }
+
         private readonly VibrateOption _vibrate;
         public string VibrateName
         {
@@ -108,8 +117,6 @@ namespace FoodTracker.ViewModel
                 return _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
             }
         }
-
-        public bool TimerIsActive => _timer.IsActive;
         // TODO: ADDING NEW OPTION: properties
 
         private TimeSpan getInterval()

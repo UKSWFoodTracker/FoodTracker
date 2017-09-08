@@ -10,6 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <AbsoluteLayout Grid.Row="0" BackgroundColor="White">
@@ -30,17 +31,21 @@
                 Text="Settings" 
                 Clicked="btnSettings_Clicked" 
                 BackgroundColor="#2c3e50" />
-        <Label x:Name="lblTime" Grid.Row="3" 
-               Text="{Binding TimerValue, Mode=OneWay, StringFormat='Time left: {0}'}" 
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" 
-               TextColor="White"
-               FontSize="30"/>
-        <Button x:Name="btnTimerSwitch" 
-                Text="On/Off Notifications" 
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                FontSize="30"
-                Clicked="BtnTimerSwitch_OnClicked"/>
+        <StackLayout 
+            Grid.Row="3"
+            Orientation="Vertical">
+            <Label x:Name="lblTime"
+                   Text="{Binding TimerValue, Mode=OneWay, StringFormat='Time left: {0}'}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="White"
+                   FontSize="30" />
+            <Button x:Name="btnNotifyButton"
+                    Text="{Binding NotifyButton}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontSize="30"
+                    Clicked="BtnNotifyButton_OnClicked" />
+        </StackLayout>
     </Grid>
 </ContentPage>

@@ -5,7 +5,7 @@ using FoodTracker.Droid;
 namespace FoodTracker.PlatformServices.Notifications
 {
     /// <summary>
-    /// Class manages notifications' all settings and features
+    /// Class manages notifications' feature
     /// </summary>
     public partial class NotifyManager
     {
