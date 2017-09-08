@@ -9,24 +9,24 @@ namespace FoodTracker.ViewModel
     //Main class to manage options
     public class Settings :INotifyPropertyChanged
     {
+        private UpdateTimerValue _updateTimerValue;
+        private readonly TimerOption _timer;
+        private readonly IntervalOption _interval;
+        private readonly NotifyOption _notify;
         public Settings()
         {
             //Loading pop-up interval from saved properties
             _interval = new IntervalOption("Pop-ups interval");
             _notify = new NotifyOption("Notification");
-            _vibrate = new VibrateOption("Vibrate");
             _timer = new TimerOption("Timer", _interval.Value);
             // TODO: ADDING NEW OPTION: creating object
 
             _updateTimerValue = new UpdateTimerValue(OnPropertyChanged);
         }
-        private UpdateTimerValue _updateTimerValue;
+
         // Interval option properties
-        private readonly IntervalOption _interval;
-        public string IntervalName
-        {
-            get => _interval.Name;
-        }
+        public string IntervalName => _interval.Name;
+
         public string IntervalValueString
         {
             get => String.Format("{0:hh\\:mm\\:ss}", _interval.Value);
@@ -35,7 +35,7 @@ namespace FoodTracker.ViewModel
                 TimeSpan timeValue = TimeSpan.Parse(value);
                 _interval.Value = timeValue;
                 var app = Application.Current as App;
-                app.myProperties.IntervalTimeSpan = timeValue;
+                if (app != null) app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
             }
         }
@@ -47,11 +47,10 @@ namespace FoodTracker.ViewModel
                 TimeSpan timeValue = value;
                 _interval.Value = timeValue;
                 var app = Application.Current as App;
-                app.myProperties.IntervalTimeSpan = timeValue;
+                if (app != null) app.myProperties.IntervalTimeSpan = timeValue;
                 OnPropertyChanged();
             }
         }
-        private NotifyOption _notify;
         public string NotifyName
         {
             get => _notify.Name;
@@ -64,7 +63,7 @@ namespace FoodTracker.ViewModel
                 _notify.Value = value;
                 // Saving in app properties
                 var app = Application.Current as App;
-                app.myProperties.NotifyState = value;
+                if (app != null) app.myProperties.NotifyState = value;
                 // Cancel notification request
                 if (value)
                 {
@@ -80,6 +79,9 @@ namespace FoodTracker.ViewModel
             }
         }
 
+        /// <summary>
+        /// Update string in MainPage's "On/Off" button
+        /// </summary>
         public string NotifyButton
         {
             get
@@ -88,24 +90,6 @@ namespace FoodTracker.ViewModel
                 return !_notify.Value ? "On" : "Off";
             }
         }
-
-        private readonly VibrateOption _vibrate;
-        public string VibrateName
-        {
-            get => _vibrate.Name;
-        }
-        public bool VibrateValue
-        {
-            get => _vibrate.Value;
-            set
-            {
-                _vibrate.Value = value;
-                var app = Application.Current as App;
-                app.myProperties.VibrateState = value;
-                OnPropertyChanged();
-            }
-        }
-        private readonly TimerOption _timer;
 
         public string TimerValue {
             get
@@ -131,19 +115,21 @@ namespace FoodTracker.ViewModel
         /// <summary>
         /// Request to stop notifications
         /// </summary>
-        public static event StartRequestHandler StartRequestEvent;
+        public static event StartRequestHandler StartNotifyRequestEvent;
         public delegate void StartRequestHandler(int intervalTotalMiliseconds);
         private void OnStopRequest()
         {
-            StartRequestHandler request = StartRequestEvent;
+            StartRequestHandler request = StartNotifyRequestEvent;
             request?.Invoke((int)IntervalValueTimeSpan.TotalMilliseconds);
         }
-
-        public static event StopRequestHandler StopRequestEvent;
+        /// <summary>
+        /// Request to start notifications
+        /// </summary>
+        public static event StopRequestHandler StopNotifyRequestEvent;
         public delegate void StopRequestHandler();
         private void OnStartRequest()
         {
-            StopRequestHandler request = StopRequestEvent;
+            StopRequestHandler request = StopNotifyRequestEvent;
             request?.Invoke();
         }
     }

@@ -22,8 +22,6 @@ namespace FoodTracker.View
         private async void btnAddMeal_Clicked(object sender, EventArgs e)
         {
             //pass reference to other class page if you want change displayed page
-            //example: await Navigation.PushAsync(new MainPage());
-            //don't forget type async before method
             var mealPage = new MealPage();
             await Navigation.PushAsync(mealPage);
         }

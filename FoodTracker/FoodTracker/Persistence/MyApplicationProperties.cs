@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FoodTracker.ViewModel
@@ -81,6 +82,10 @@ namespace FoodTracker.ViewModel
             {
                 Application.Current.Properties[VibrateKey] = value;
             }
+        }
+        public static async Task SaveProperties()
+        {
+            await Application.Current.SavePropertiesAsync();
         }
     }
 }

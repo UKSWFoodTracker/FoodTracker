@@ -23,14 +23,9 @@ namespace FoodTracker.View
 
         protected override async void OnDisappearing()
         {
-            await _mainFeatures.SaveProperties();
+            await MyApplicationProperties.SaveProperties();
             base.OnDisappearing();
         }
-
-        //private void StopNotification(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    _mainFeatures.NotifyManager.StopNotification();
-        //}
 
         private void btnNotifyTest_Clicked(object sender, EventArgs e)
         {

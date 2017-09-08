@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class TimerOption : Option
+    class TimerOption : Option<TimeSpan>
     {
         public TimerOption(string name, TimeSpan userInterval) : base(name)
         {
@@ -17,7 +17,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         }
 
         /// <summary>
-        /// Reference to <seealso cref="IntervalOption.TimePeriod"/>
+        /// Reference to <seealso cref="IntervalOption.Value"/>
         /// </summary>
         private readonly TimeSpan _userInterval;
 
@@ -74,6 +74,15 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             //Forecasting when timer goes off
             _startNotifyTime = _userInterval + (DateTime.Now - _relativeTime);
             StartNotifyTimer = _startNotifyTime;
+        }
+
+        /// <summary>
+        /// This class don't need that method
+        /// </summary>
+        /// <returns></returns>
+        protected override TimeSpan GetFromMyProperties()
+        {
+            throw new NotImplementedException();
         }
     }
 }

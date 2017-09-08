@@ -17,7 +17,7 @@ namespace FoodTracker.PlatformServices.Notifications
         {
             public static MainActivity Main;    //We need reference to MainActivity located in MainActivity.cs file
 
-            public static void ShowNotification(bool isRepeating, int interval)
+            public static void StartNotification(bool isRepeating, int interval)
             {
                 if (Main == null)
                 {

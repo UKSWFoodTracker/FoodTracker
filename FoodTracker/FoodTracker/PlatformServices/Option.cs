@@ -5,7 +5,7 @@
     {
         private T _value;
 
-        public Option(string name)
+        protected Option(string name)
         {
             Name = name;
         }

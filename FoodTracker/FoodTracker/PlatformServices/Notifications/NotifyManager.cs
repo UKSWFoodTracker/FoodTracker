@@ -11,8 +11,8 @@ namespace FoodTracker.PlatformServices.Notifications
     {
         public NotifyManager()
         {
-            Settings.StopRequestEvent += StopNotification;
-            Settings.StartRequestEvent += StartNotification;
+            Settings.StopNotifyRequestEvent += StopNotification;
+            Settings.StartNotifyRequestEvent += StartNotification;
         }
         public static void SetMainActivity(MainActivity main)
         {
@@ -20,7 +20,7 @@ namespace FoodTracker.PlatformServices.Notifications
         }
         public void StartNotification(int intervalTotalMiliseconds)
         {
-            AlarmClockManager.ShowNotification(true, intervalTotalMiliseconds);
+            AlarmClockManager.StartNotification(true, intervalTotalMiliseconds);
         }
         public void StopNotification()
         {

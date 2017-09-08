@@ -13,9 +13,5 @@ namespace FoodTracker.ViewModel
         {
             _notifyManager = new NotifyManager();
         }
-        public async Task SaveProperties()
-        {
-            await Application.Current.SavePropertiesAsync();
-        }
     }
 }
