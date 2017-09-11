@@ -4,29 +4,44 @@
              x:Class="FoodTracker.View.SettingsPage"
              Title="Settings">
     <Grid>
-        <TableView x:Name="tableView" Intent="Settings">
+        <TableView x:Name="tableView" 
+                   Intent="Settings">
             <TableRoot>
                 <TableSection Title="Notification options">
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="13,0">
-                            <Label Text="{Binding IntervalName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <Entry Placeholder="hh:mm:ss" Text="{Binding IntervalValueString, Mode=TwoWay}" HorizontalOptions="EndAndExpand" />
+                        <StackLayout Orientation="Horizontal" 
+                                     Padding="13,0">
+                            <Label Text="{Binding IntervalName, Mode=OneWay}" 
+                                   VerticalOptions="Center" 
+                                   Margin="5,0,0,0"/>
+                            <Entry Placeholder="hh:mm:ss" 
+                                   Text="{Binding IntervalValueString, Mode=TwoWay}" 
+                                   HorizontalOptions="EndAndExpand" />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="13,0">
-                            <Label Text="{Binding NotifyName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <Switch IsToggled="{Binding NotifyValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"  />
+                            <Label Text="{Binding NotifyName, Mode=OneWay}" 
+                                   VerticalOptions="Center" 
+                                   Margin="5,0,0,0"/>
+                            <Switch IsToggled="{Binding NotifyValue, Mode=TwoWay}" 
+                                    HorizontalOptions="EndAndExpand"  />
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="13,0">
-                            <Label Text="{Binding VibrateName, Mode=OneWay}" VerticalOptions="Center" Margin="5,0,0,0"/>
-                            <Switch IsToggled="{Binding VibrateValue, Mode=TwoWay}" HorizontalOptions="EndAndExpand"/>
+                        <StackLayout Orientation="Horizontal" 
+                                     Padding="13,0">
+                            <Label Text="{Binding VibrateName, Mode=OneWay}" 
+                                   VerticalOptions="Center" 
+                                   Margin="5,0,0,0"/>
+                            <Switch IsToggled="{Binding VibrateValue, Mode=TwoWay}" 
+                                    HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                     </ViewCell>
                     <ViewCell>
-                        <Button x:Name="btnNotifyTest" Text="Test" Clicked="btnNotifyTest_Clicked"/>
+                        <Button x:Name="notifyTest" 
+                                Text="Test" 
+                                Clicked="notifyTest_Clicked"/>
                     </ViewCell>
                 </TableSection>
             </TableRoot>

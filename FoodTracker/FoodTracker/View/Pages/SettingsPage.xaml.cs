@@ -27,7 +27,7 @@ namespace FoodTracker.View
             base.OnDisappearing();
         }
 
-        private void btnNotifyTest_Clicked(object sender, EventArgs e)
+        private void notifyTest_Clicked(object sender, EventArgs e)
         {
             int totalMiliseconds = (int) _settings.IntervalValueTimeSpan.TotalMilliseconds;
             _mainFeatures.NotifyManager.StartNotification(totalMiliseconds);

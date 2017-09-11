@@ -13,7 +13,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <AbsoluteLayout Grid.Row="0" BackgroundColor="White">
+        <AbsoluteLayout Grid.Row="0" 
+                        BackgroundColor="White">
             <Label Text="AppName" 
                    TextColor="Gray"
                    FontAttributes="Bold" 
@@ -21,12 +22,12 @@
                    AbsoluteLayout.LayoutBounds="0.5, 0" 
                    AbsoluteLayout.LayoutFlags="PositionProportional" />
         </AbsoluteLayout>
-        <Button x:Name="btnAddMeal" 
+        <Button x:Name="pushMealPage" 
                 Grid.Row="1" 
                 Text="Add_Meal" 
                 Clicked="btnAddMeal_Clicked" 
                 BackgroundColor="#2c3e50" />
-        <Button x:Name="btnSettings" 
+        <Button x:Name="pushSettingsPage" 
                 Grid.Row="2" 
                 Text="Settings" 
                 Clicked="btnSettings_Clicked" 
@@ -34,13 +35,13 @@
         <StackLayout 
             Grid.Row="3"
             Orientation="Vertical">
-            <Label x:Name="lblTime"
+            <Label x:Name="timerDisplay"
                    Text="{Binding TimerValue, Mode=OneWay, StringFormat='Time left: {0}'}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    TextColor="White"
                    FontSize="30" />
-            <Button x:Name="btnNotifyButton"
+            <Button x:Name="notifySwitcher"
                     Text="{Binding NotifyButton}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
