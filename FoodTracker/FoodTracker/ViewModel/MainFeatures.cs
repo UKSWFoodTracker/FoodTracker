@@ -1,17 +1,21 @@
-﻿using FoodTracker.Model;
-using FoodTracker.PlatformServices.Notifications;
-using Xamarin.Forms;
-using System.Threading.Tasks;
+﻿using FoodTracker.PlatformServices.Notifications;
 
 namespace FoodTracker.ViewModel
 {
     public class MainFeatures
     {
         private NotifyManager _notifyManager;
-        public NotifyManager NotifyManager => _notifyManager;
         public MainFeatures()
         {
             _notifyManager = new NotifyManager();
+        }
+        public void StartNotification(int intervalTotalMiliseconds)
+        {
+            _notifyManager.StartNotification(intervalTotalMiliseconds);
+        }
+        public void StopNotification()
+        {
+            _notifyManager.StopNotification();
         }
     }
 }

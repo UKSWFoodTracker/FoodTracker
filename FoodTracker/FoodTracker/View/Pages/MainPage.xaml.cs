@@ -12,8 +12,8 @@ namespace FoodTracker.View
         public MainPage ()
 		{
 			InitializeComponent ();
-            _settings = new Settings();
 		    _mainFeatures = new MainFeatures();
+            _settings = new Settings(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
 
             timerDisplay.BindingContext = _settings;
 		    notifySwitcher.BindingContext = _settings;
@@ -38,11 +38,11 @@ namespace FoodTracker.View
 	        if (!_settings.NotifyValue)
 	        {
 	            int totalMiliseconds = (int)_settings.IntervalValueTimeSpan.TotalMilliseconds;
-	            _mainFeatures.NotifyManager.StartNotification(totalMiliseconds);
+	            _mainFeatures.StartNotification(totalMiliseconds);
 	        }
 	        else
 	        {
-                _mainFeatures.NotifyManager.StopNotification();
+                _mainFeatures.StopNotification();
 	        }
 	        _settings.NotifyValue = !_settings.NotifyValue;
         }

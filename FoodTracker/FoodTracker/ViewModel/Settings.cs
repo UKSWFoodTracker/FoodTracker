@@ -13,7 +13,7 @@ namespace FoodTracker.ViewModel
         private readonly TimerOption _timer;
         private readonly IntervalOption _interval;
         private readonly NotifyOption _notify;
-        public Settings()
+        public Settings(StartNotificationHandler stopNotifyMethod, StopNotificationHandler startNotifyMethod)
         {
             //Loading pop-up interval from saved properties
             _interval = new IntervalOption("Pop-ups interval");
@@ -51,6 +51,13 @@ namespace FoodTracker.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public delegate void StartNotificationHandler(int intervalTotalMiliseconds);
+        public delegate void StopNotificationHandler();
+
+        private StartNotificationHandler _startNotifyMethod;
+        private StopNotificationHandler _stopNotifyMethod;
+
         public string NotifyName
         {
             get => _notify.Name;
@@ -67,11 +74,11 @@ namespace FoodTracker.ViewModel
                 // Cancel notification request
                 if (value)
                 {
-                    OnStopRequest();
+                    _stopNotifyMethod();
                 }
                 else
                 {
-                    OnStartRequest();
+                    _startNotifyMethod((int) _interval.Value.TotalMilliseconds);
                     _timer.SetTimer();
                 }
 
@@ -110,27 +117,6 @@ namespace FoodTracker.ViewModel
         private void OnPropertyChanged([CallerMemberName] string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-        /// <summary>
-        /// Request to stop notifications
-        /// </summary>
-        public static event StartRequestHandler StartNotifyRequestEvent;
-        public delegate void StartRequestHandler(int intervalTotalMiliseconds);
-        private void OnStopRequest()
-        {
-            StartRequestHandler request = StartNotifyRequestEvent;
-            request?.Invoke((int)IntervalValueTimeSpan.TotalMilliseconds);
-        }
-        /// <summary>
-        /// Request to start notifications
-        /// </summary>
-        public static event StopRequestHandler StopNotifyRequestEvent;
-        public delegate void StopRequestHandler();
-        private void OnStartRequest()
-        {
-            StopRequestHandler request = StopNotifyRequestEvent;
-            request?.Invoke();
         }
     }
 }

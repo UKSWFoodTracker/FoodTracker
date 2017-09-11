@@ -11,8 +11,6 @@ namespace FoodTracker.PlatformServices.Notifications
     {
         public NotifyManager()
         {
-            Settings.StopNotifyRequestEvent += StopNotification;
-            Settings.StartNotifyRequestEvent += StartNotification;
         }
         public static void SetMainActivity(MainActivity main)
         {
