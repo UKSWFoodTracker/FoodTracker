@@ -13,13 +13,16 @@ namespace FoodTracker.ViewModel
         private readonly TimerOption _timer;
         private readonly IntervalOption _interval;
         private readonly NotifyOption _notify;
-        public Settings(StartNotificationHandler stopNotifyMethod, StopNotificationHandler startNotifyMethod)
+        public Settings(StartNotificationHandler startNotifyMethod, StopNotificationHandler stopNotifyMethod)
         {
             //Loading pop-up interval from saved properties
             _interval = new IntervalOption("Pop-ups interval");
             _notify = new NotifyOption("Notification");
             _timer = new TimerOption("Timer", _interval.Value);
             // TODO: ADDING NEW OPTION: creating object
+
+            _stopNotifyMethod = stopNotifyMethod;
+            _startNotifyMethod = startNotifyMethod;
 
             _updateTimerValue = new UpdateTimerValue(OnPropertyChanged);
         }
@@ -55,8 +58,8 @@ namespace FoodTracker.ViewModel
         public delegate void StartNotificationHandler(int intervalTotalMiliseconds);
         public delegate void StopNotificationHandler();
 
-        private StartNotificationHandler _startNotifyMethod;
-        private StopNotificationHandler _stopNotifyMethod;
+        private readonly StartNotificationHandler _startNotifyMethod;
+        private readonly StopNotificationHandler _stopNotifyMethod;
 
         public string NotifyName
         {
@@ -72,7 +75,7 @@ namespace FoodTracker.ViewModel
                 var app = Application.Current as App;
                 if (app != null) app.myProperties.NotifyState = value;
                 // Cancel notification request
-                if (value)
+                if (!value)
                 {
                     _stopNotifyMethod();
                 }

@@ -35,16 +35,7 @@ namespace FoodTracker.View
 
 	    private void BtnNotifyButton_OnClicked(object sender, EventArgs e)
 	    {
-	        if (!_settings.NotifyValue)
-	        {
-	            int totalMiliseconds = (int)_settings.IntervalValueTimeSpan.TotalMilliseconds;
-	            _mainFeatures.StartNotification(totalMiliseconds);
-	        }
-	        else
-	        {
-                _mainFeatures.StopNotification();
-	        }
 	        _settings.NotifyValue = !_settings.NotifyValue;
-        }
+	    }
 	}
 }

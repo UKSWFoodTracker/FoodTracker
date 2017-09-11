@@ -28,21 +28,6 @@
                                     HorizontalOptions="EndAndExpand"  />
                         </StackLayout>
                     </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" 
-                                     Padding="13,0">
-                            <Label Text="{Binding VibrateName, Mode=OneWay}" 
-                                   VerticalOptions="Center" 
-                                   Margin="5,0,0,0"/>
-                            <Switch IsToggled="{Binding VibrateValue, Mode=TwoWay}" 
-                                    HorizontalOptions="EndAndExpand"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <Button x:Name="notifyTest" 
-                                Text="Test" 
-                                Clicked="notifyTest_Clicked"/>
-                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>

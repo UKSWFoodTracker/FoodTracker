@@ -42,12 +42,20 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         public string HowMuchTimeLeft(TimeSpan intervalSpan)
         {
-            TimeSpan time = (_startNotifyTime + intervalSpan) - (DateTime.Now - _relativeTime);
-            if (time <= _zeroTime)
+            TimeSpan timeLeft = computeTimeLeft(intervalSpan);
+            if (timeLeft <= _zeroTime)
             {
                 SetTimer();
+                timeLeft = computeTimeLeft(intervalSpan);
             }
-            return String.Format("{0:hh\\:mm\\:ss}", time);
+            return String.Format("{0:hh\\:mm\\:ss}", timeLeft);
+        }
+
+        private TimeSpan computeTimeLeft(TimeSpan intervalSpan)
+        {
+            TimeSpan forecastedTime = _startNotifyTime + intervalSpan;
+            TimeSpan relativeNow = DateTime.Now - _relativeTime;
+            return forecastedTime - relativeNow;
         }
 
         /// <summary>
