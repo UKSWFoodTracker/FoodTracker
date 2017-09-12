@@ -72,14 +72,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         {
             get
             {
-                var app = Application.Current as App;
-                return app.myProperties.StartNotifyTime;
+                GetFromMyProperties();
+                return _startNotifyTime;
             }
             set
             {
-                var app = Application.Current as App;
-                app.myProperties.StartNotifyTime = value;
                 _startNotifyTime = value;
+                SaveToMyProperties();
             }
         }
 
@@ -87,9 +86,16 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// This class don't need that method yet it has to be because of Option class
         /// <seealso cref="Option{T}"/>
         /// </summary>
-        protected override TimeSpan GetFromMyProperties()
+        protected override void GetFromMyProperties()
         {
-            throw new NotImplementedException();
+            var app = Application.Current as App;
+            _startNotifyTime = app.myProperties.StartNotifyTime;
+        }
+        
+        protected override void SaveToMyProperties()
+        {
+            var app = Application.Current as App;
+            app.myProperties.StartNotifyTime = _startNotifyTime;
         }
     }
 }

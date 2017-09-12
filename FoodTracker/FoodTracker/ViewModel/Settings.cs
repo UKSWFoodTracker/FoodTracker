@@ -1,7 +1,6 @@
 ﻿using System;
 using FoodTracker.PlatformServices.Notifications.Options;
 using System.ComponentModel;
-using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 
 namespace FoodTracker.ViewModel
@@ -10,9 +9,9 @@ namespace FoodTracker.ViewModel
     public class Settings :INotifyPropertyChanged
     {
         private UpdateTimerValue _updateTimerValue;
-        private readonly TimerOption _timer;
         private readonly IntervalOption _interval;
         private readonly NotifyOption _notify;
+        private readonly TimerOption _timer;
         public Settings(StartNotificationHandler startNotifyMethod, StopNotificationHandler stopNotifyMethod)
         {
             //Loading pop-up interval from saved properties
@@ -35,10 +34,7 @@ namespace FoodTracker.ViewModel
             get => String.Format("{0:hh\\:mm\\:ss}", _interval.Value);
             set
             {
-                TimeSpan timeValue = TimeSpan.Parse(value);
-                _interval.Value = timeValue;
-                var app = Application.Current as App;
-                if (app != null) app.myProperties.IntervalTimeSpan = timeValue;
+                _interval.Value = TimeSpan.Parse(value);
                 OnPropertyChanged();
             }
         }
@@ -47,10 +43,7 @@ namespace FoodTracker.ViewModel
             get => _interval.Value;
             set
             {
-                TimeSpan timeValue = value;
-                _interval.Value = timeValue;
-                var app = Application.Current as App;
-                if (app != null) app.myProperties.IntervalTimeSpan = timeValue;
+                _interval.Value = value;
                 OnPropertyChanged();
             }
         }
@@ -65,6 +58,7 @@ namespace FoodTracker.ViewModel
         {
             get => _notify.Name;
         }
+
         /// <summary>
         /// Value indicates whether notifications are turn on or down
         /// </summary>
@@ -74,9 +68,7 @@ namespace FoodTracker.ViewModel
             set
             {
                 _notify.Value = value;
-                // Saving in app properties
-                var app = Application.Current as App;
-                if (app != null) app.myProperties.NotifyState = value;
+
                 // Cancel notification request
                 if (!value)
                 {

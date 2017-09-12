@@ -1,6 +1,5 @@
 ﻿namespace FoodTracker.PlatformServices
 {
-    /*This class holds data for single setting which is passing to list in View.SettingsPage*/
     public abstract class Option<T>
     {
         private T _value;
@@ -10,16 +9,30 @@
             Name = name;
         }
 
-        //properties using to display value
+        /// <summary>
+        /// Properties using to display value
+        /// </summary>
         public string Name { get; private set; }
 
+        /// <summary>
+        /// Options have to have Value properties but that depends on needed type
+        /// </summary>
         public T Value
         {
-            get => _value;
-            set => _value = value;
+            get
+            {
+                GetFromMyProperties();
+                return _value;
+            }
+            set
+            {
+                _value = value;
+                SaveToMyProperties();
+            }
         }
 
-        // Options have to have Value properties but that depends on needed type
-        protected abstract T GetFromMyProperties();
+        protected abstract void GetFromMyProperties();
+
+        protected abstract void SaveToMyProperties();
     }
 }

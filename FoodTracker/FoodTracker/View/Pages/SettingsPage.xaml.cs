@@ -8,13 +8,9 @@ namespace FoodTracker.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private readonly Settings _settings;
-
         public SettingsPage(ref Settings settings)
         {
             InitializeComponent();
-
-            _settings = settings;
 
             BindingContext = settings;
         }
