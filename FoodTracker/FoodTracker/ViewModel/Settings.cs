@@ -65,6 +65,9 @@ namespace FoodTracker.ViewModel
         {
             get => _notify.Name;
         }
+        /// <summary>
+        /// Value indicates whether notifications are turn on or down
+        /// </summary>
         public bool NotifyValue
         {
             get => _notify.Value;
@@ -108,7 +111,7 @@ namespace FoodTracker.ViewModel
                 {
                     return "Interval off";
                 }
-                return _timer.HowMuchTimeLeft(IntervalValueTimeSpan);
+                return _timer.HowMuchTimeLeft();
             }
         }
         // TODO: ADDING NEW OPTION: properties

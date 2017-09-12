@@ -10,7 +10,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             //Get value from myProperties
             _startNotifyTime = StartNotifyTimer;
 
-            _relativeTime = DateTime.Parse("01.01.2000");
+            _relativeTime = DateTime.Parse("09.12.2017");
             _zeroTime = new TimeSpan(0, 0, 0, 0);
 
             _userInterval = userInterval;
@@ -40,26 +40,32 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
-        public string HowMuchTimeLeft(TimeSpan intervalSpan)
+        public string HowMuchTimeLeft()
         {
-            TimeSpan timeLeft = computeTimeLeft(intervalSpan);
+            TimeSpan timeLeft = ComputeTimeLeft();
             if (timeLeft <= _zeroTime)
             {
                 SetTimer();
-                timeLeft = computeTimeLeft(intervalSpan);
+                timeLeft = ComputeTimeLeft();
             }
             return String.Format("{0:hh\\:mm\\:ss}", timeLeft);
         }
 
-        private TimeSpan computeTimeLeft(TimeSpan intervalSpan)
+        private TimeSpan ComputeTimeLeft()
         {
-            TimeSpan forecastedTime = _startNotifyTime + intervalSpan;
+            TimeSpan forecastedTime = _startNotifyTime + _userInterval;
             TimeSpan relativeNow = DateTime.Now - _relativeTime;
             return forecastedTime - relativeNow;
         }
 
+        public void SetTimer()
+        {
+            //Forecasting when timer goes off
+            StartNotifyTimer = DateTime.Now - _relativeTime;
+        }
+
         /// <summary>
-        /// Property for startNotifyTime and it saves value to MyProperties class as well. 
+        /// Property for _startNotifyTime and it saves value to MyProperties class as well. 
         /// <see cref="_startNotifyTime"/> 
         /// </summary>
         private TimeSpan StartNotifyTimer
@@ -77,17 +83,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             }
         }
 
-        public void SetTimer()
-        {
-            //Forecasting when timer goes off
-            _startNotifyTime = _userInterval + (DateTime.Now - _relativeTime);
-            StartNotifyTimer = _startNotifyTime;
-        }
-
         /// <summary>
-        /// This class don't need that method
+        /// This class don't need that method yet it has to be because of Option class
+        /// <seealso cref="Option{T}"/>
         /// </summary>
-        /// <returns></returns>
         protected override TimeSpan GetFromMyProperties()
         {
             throw new NotImplementedException();

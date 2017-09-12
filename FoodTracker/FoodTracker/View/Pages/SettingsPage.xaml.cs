@@ -9,14 +9,12 @@ namespace FoodTracker.View
     public partial class SettingsPage : ContentPage
     {
         private readonly Settings _settings;
-        private readonly MainFeatures _mainFeatures;
 
-        public SettingsPage(ref Settings settings, ref MainFeatures mainFeatures)
+        public SettingsPage(ref Settings settings)
         {
             InitializeComponent();
 
             _settings = settings;
-            _mainFeatures = mainFeatures;
 
             BindingContext = settings;
         }
