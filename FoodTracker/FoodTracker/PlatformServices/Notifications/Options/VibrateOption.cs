@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
@@ -18,10 +15,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             return app.myProperties.VibrateState;
         }
 
-        protected override void SaveToMyProperties()
+        protected override void SaveToMyProperties(bool value)
         {
             var app = Application.Current as App;
-            app.myProperties.VibrateState = Value;
+            app.myProperties.VibrateState = value;
         }
     }
 }

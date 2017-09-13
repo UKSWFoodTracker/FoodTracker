@@ -27,12 +27,12 @@
             set
             {
                 _value = value;
-                SaveToMyProperties();
+                SaveToMyProperties(value);
             }
         }
 
         protected abstract T GetFromMyProperties();
 
-        protected abstract void SaveToMyProperties();
+        protected abstract void SaveToMyProperties(T value);
     }
 }

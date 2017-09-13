@@ -17,7 +17,7 @@ namespace FoodTracker.ViewModel
             //Loading pop-up interval from saved properties
             _interval = new IntervalOption("Pop-ups interval");
             _notify = new NotifyOption("Notification");
-            _timer = new TimerOption("Timer", _interval.Value);
+            _timer = new TimerOption("Timer", _interval);
             // TODO: ADDING NEW OPTION: creating object
 
             _stopNotifyMethod = stopNotifyMethod;

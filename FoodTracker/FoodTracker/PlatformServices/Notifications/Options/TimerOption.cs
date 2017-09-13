@@ -5,21 +5,21 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 {
     class TimerOption : Option<TimeSpan>
     {
-        public TimerOption(string name, TimeSpan userInterval) : base(name)
+        public TimerOption(string name, IntervalOption intervalOption) : base(name)
         {
-            //Get value from myProperties
+            // Get value from myProperties
             _startNotifyTime = StartNotifyTimer;
 
             _relativeTime = DateTime.Parse("09.12.2017");
             _zeroTime = new TimeSpan(0, 0, 0, 0);
 
-            _userInterval = userInterval;
+            _intervalOption = intervalOption;
         }
 
         /// <summary>
         /// Reference to <seealso cref="IntervalOption.Value"/>
         /// </summary>
-        private readonly TimeSpan _userInterval;
+        private readonly IntervalOption _intervalOption;
 
         /// <summary>
         /// This field is needed to avoid performance crash in HowMuchTimeLeft property
@@ -53,7 +53,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 
         private TimeSpan ComputeTimeLeft()
         {
-            TimeSpan forecastedTime = _startNotifyTime + _userInterval;
+            TimeSpan forecastedTime = _startNotifyTime + _intervalOption.Value;
             TimeSpan relativeNow = DateTime.Now - _relativeTime;
             return forecastedTime - relativeNow;
         }
@@ -78,7 +78,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             set
             {
                 _startNotifyTime = value;
-                SaveToMyProperties();
+                SaveToMyProperties(_startNotifyTime);
             }
         }
 
@@ -92,10 +92,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             return app.myProperties.StartNotifyTime;
         }
         
-        protected override void SaveToMyProperties()
+        protected override void SaveToMyProperties(TimeSpan value)
         {
             var app = Application.Current as App;
-            app.myProperties.StartNotifyTime = _startNotifyTime;
+            app.myProperties.StartNotifyTime = value;
         }
     }
 }

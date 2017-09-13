@@ -18,10 +18,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             return app.myProperties.IntervalTimeSpan;
         }
 
-        protected override void SaveToMyProperties()
+        protected override void SaveToMyProperties(TimeSpan value)
         {
             var app = Application.Current as App;
-            app.myProperties.IntervalTimeSpan = Value;
+            app.myProperties.IntervalTimeSpan = value;
         }
     }
 }
