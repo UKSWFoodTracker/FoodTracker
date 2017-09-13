@@ -21,7 +21,7 @@
         {
             get
             {
-                GetFromMyProperties();
+                _value = GetFromMyProperties();
                 return _value;
             }
             set
@@ -31,7 +31,7 @@
             }
         }
 
-        protected abstract void GetFromMyProperties();
+        protected abstract T GetFromMyProperties();
 
         protected abstract void SaveToMyProperties();
     }
