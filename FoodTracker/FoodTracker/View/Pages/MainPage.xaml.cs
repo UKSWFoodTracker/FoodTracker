@@ -1,27 +1,29 @@
 ﻿using System;
 using FoodTracker.ViewModel;
 using Xamarin.Forms;
+using FoodTracker.ViewModel.Pages;
 
 namespace FoodTracker.View
 {
 	public partial class MainPage : ContentPage
 	{
-        private MainFeatures _mainFeatures;
-	    private Settings _settings;
+	    private readonly MainPageViewModel _mainPageViewModel;
+	    private readonly MainFeatures _mainFeatures;
 
         public MainPage ()
 		{
 			InitializeComponent ();
-		    _mainFeatures = new MainFeatures();
-            _settings = new Settings(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
 
-            timerDisplay.BindingContext = _settings;
-		    notifySwitcher.BindingContext = _settings;
+		    _mainFeatures = new MainFeatures();
+            _mainPageViewModel = new MainPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
+
+            timerDisplay.BindingContext = _mainPageViewModel;
+		    notifySwitcher.BindingContext = _mainPageViewModel;
 		}
 
         private async void btnAddMeal_Clicked(object sender, EventArgs e)
         {
-            //pass reference to other class page if you want change displayed page
+            // Pass reference to other class page if you want change displayed page
             var mealPage = new MealPage();
             await Navigation.PushAsync(mealPage);
         }
@@ -29,13 +31,14 @@ namespace FoodTracker.View
         private async void btnSettings_Clicked(object sender, EventArgs e)
         {
             // Pass data to other page
-            var settingsPage = new SettingsPage(ref _settings);
+            var settings = _mainPageViewModel.Settings;
+            var settingsPage = new SettingsPage(ref settings);
             await Navigation.PushAsync(settingsPage);
         }
 
 	    private void BtnNotifyButton_OnClicked(object sender, EventArgs e)
 	    {
-	        _settings.NotifyValue = !_settings.NotifyValue;
+	        _mainPageViewModel.ChangeNotifyState();
 	    }
 	}
 }

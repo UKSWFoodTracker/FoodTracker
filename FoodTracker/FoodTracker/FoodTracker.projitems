@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\IntervalOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\VibrateOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ReflectionHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\Pages\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\ISQLiteDb.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\MyApplicationProperties.cs" />
