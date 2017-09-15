@@ -7,7 +7,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 {
     class NotifyOption : Option<bool>
     {
-        public NotifyOption(string name) : base(name)
+        public NotifyOption() : base(name)
         {
             GetFromMyProperties();
         }

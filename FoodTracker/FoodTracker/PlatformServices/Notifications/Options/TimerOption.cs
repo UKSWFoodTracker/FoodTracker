@@ -5,7 +5,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 {
     class TimerOption : Option<TimeSpan>
     {
-        public TimerOption(string name, IntervalOption intervalOption) : base(name)
+        public TimerOption(IntervalOption intervalOption) : base(name)
         {
             // Get value from myProperties
             _startNotifyTime = StartNotifyTimer;

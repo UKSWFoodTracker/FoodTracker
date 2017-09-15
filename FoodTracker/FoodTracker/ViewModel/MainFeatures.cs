@@ -17,5 +17,8 @@ namespace FoodTracker.ViewModel
         {
             _notifyManager.StopNotification();
         }
+
+        public delegate void StartNotificationHandler(int intervalTotalMiliseconds);
+        public delegate void StopNotificationHandler();
     }
 }

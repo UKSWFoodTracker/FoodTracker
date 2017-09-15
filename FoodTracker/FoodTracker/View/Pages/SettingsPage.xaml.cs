@@ -2,17 +2,18 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FoodTracker.ViewModel;
+using FoodTracker.ViewModel.Pages;
 
 namespace FoodTracker.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        public SettingsPage(ref Settings settings)
+        public SettingsPage(ref SettingsPageViewModel settingsPageViewModel)
         {
             InitializeComponent();
 
-            BindingContext = settings;
+            BindingContext = settingsPageViewModel;
         }
 
         protected override async void OnDisappearing()

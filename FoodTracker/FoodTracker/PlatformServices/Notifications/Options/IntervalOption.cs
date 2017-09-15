@@ -7,7 +7,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 {
     class IntervalOption : Option<TimeSpan>
     {
-        public IntervalOption(string name) : base(name)
+        public IntervalOption() : base(name)
         {
             GetFromMyProperties();
         }
