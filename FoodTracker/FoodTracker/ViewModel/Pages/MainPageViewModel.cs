@@ -34,16 +34,16 @@ namespace FoodTracker.ViewModel.Pages
             {
                 _notify.Value = value;
 
-                if (!value)
-                {
-                    // Cancel notification request
-                    _stopNotifyMethod();
-                }
-                else
-                {
-                    _startNotifyMethod((int)_interval.Value.TotalMilliseconds);
-                    _timer.SetTimer();
-                }
+                //if (!value)
+                //{
+                //    // Cancel notification request
+                //    _stopNotifyMethod();
+                //}
+                //else
+                //{
+                //    _startNotifyMethod((int)_interval.Value.TotalMilliseconds);
+                //    _timer.SetTimer();
+                //}
 
                 OnPropertyChanged();
             }
@@ -72,7 +72,8 @@ namespace FoodTracker.ViewModel.Pages
 
         private void PauseTimer()
         {
-            throw new System.NotImplementedException();
+            _stopNotifyMethod();
+            _timer.PauseTimer();
         }
 
 

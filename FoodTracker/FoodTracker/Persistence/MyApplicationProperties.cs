@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,10 +13,27 @@ namespace FoodTracker.ViewModel
     {
         // Key which is stored in Application.Current.Properties dictionary
         private readonly string StartNotifyTimeKey = "StartNotifyTimeSpan";
+        private readonly string PauseNotifyTimeKey = "PauseNotifyTimeSpan";
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
         private readonly string NotifyKey = "NotifyState";
         private readonly string VibrateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
+        public TimeSpan PauseNotifyTime
+        {
+            get
+            {
+                if (Application.Current.Properties.ContainsKey(PauseNotifyTimeKey))
+                {
+                    return (TimeSpan)Application.Current.Properties[PauseNotifyTimeKey];
+                }
+                Application.Current.Properties[PauseNotifyTimeKey] = new TimeSpan();
+                return (TimeSpan)Application.Current.Properties[PauseNotifyTimeKey];
+            }
+            set
+            {
+                Application.Current.Properties[PauseNotifyTimeKey] = value;
+            }
+        }
         public TimeSpan StartNotifyTime
         {
             get

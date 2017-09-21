@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
@@ -8,7 +9,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         public TimerOption(IntervalOption intervalOption) : base("Interval")
         {
             // Get value from myProperties
-            _startNotifyTime = StartNotifyTimer;
+            _startNotifyTime = StartTimerTime;
 
             _relativeTime = DateTime.Parse("09.12.2017");
             _zeroTime = new TimeSpan(0, 0, 0, 0);
@@ -37,6 +38,8 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         private readonly DateTime _relativeTime;
 
+        private TimeSpan _stopTimerTime;
+
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
@@ -53,6 +56,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 
         private TimeSpan ComputeTimeLeft()
         {
+            //Forecasting when timer goes off
             TimeSpan forecastedTime = _startNotifyTime + _intervalOption.Value;
             TimeSpan relativeNow = DateTime.Now - _relativeTime;
             return forecastedTime - relativeNow;
@@ -60,15 +64,43 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 
         public void SetTimer()
         {
-            //Forecasting when timer goes off
-            StartNotifyTimer = DateTime.Now - _relativeTime;
+            StartTimerTime = DateTime.Now - _relativeTime;
+        }
+
+        /// <summary>
+        /// Method used only when timer was stoped
+        /// </summary>
+        public void ResumeTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PauseTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TimeSpan PauseTimerTime
+        {
+            get
+            {
+                var app = Application.Current as App;
+                _stopTimerTime = app.myProperties.PauseNotifyTime;
+                return _stopTimerTime;
+            }
+            set
+            {
+                var app = Application.Current as App;
+                app.myProperties.PauseNotifyTime = value;
+                _stopTimerTime = value;
+            }
         }
 
         /// <summary>
         /// Property for _startNotifyTime and it saves value to MyProperties class as well. 
         /// <see cref="_startNotifyTime"/> 
         /// </summary>
-        private TimeSpan StartNotifyTimer
+        private TimeSpan StartTimerTime
         {
             get
             {
@@ -82,10 +114,6 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             }
         }
 
-        /// <summary>
-        /// This class don't need that method yet it has to be because of Option class
-        /// <seealso cref="Option{T}"/>
-        /// </summary>
         protected override TimeSpan GetFromMyProperties()
         {
             var app = Application.Current as App;
