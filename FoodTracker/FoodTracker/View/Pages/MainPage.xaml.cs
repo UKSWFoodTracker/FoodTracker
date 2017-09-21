@@ -18,17 +18,17 @@ namespace FoodTracker.View
             _mainPageViewModel = new MainPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
 
             timerDisplay.BindingContext = _mainPageViewModel;
-		    notifySwitcher.BindingContext = _mainPageViewModel;
+		    pause.BindingContext = _mainPageViewModel;
 		}
 
-        private async void btnAddMeal_Clicked(object sender, EventArgs e)
+        private async void AddMeal_OnClicked(object sender, EventArgs e)
         {
             // Pass reference to other class page if you want change displayed page
             var mealPage = new MealPage();
             await Navigation.PushAsync(mealPage);
         }
 
-        private async void btnSettings_Clicked(object sender, EventArgs e)
+        private async void Settings_OnClicked(object sender, EventArgs e)
         {
             // Pass data to other page
             var settingsPageVM = new SettingsPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
@@ -36,9 +36,9 @@ namespace FoodTracker.View
             await Navigation.PushAsync(settingsPage);
         }
 
-	    private void BtnNotifyButton_OnClicked(object sender, EventArgs e)
+	    private void Pause_OnClicked(object sender, EventArgs e)
 	    {
-	        _mainPageViewModel.ChangeNotifyState();
+	        _mainPageViewModel.ChangeTimerStatus();
 	    }
 	}
 }

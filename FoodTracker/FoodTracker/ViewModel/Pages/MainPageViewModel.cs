@@ -34,9 +34,9 @@ namespace FoodTracker.ViewModel.Pages
             {
                 _notify.Value = value;
 
-                // Cancel notification request
                 if (!value)
                 {
+                    // Cancel notification request
                     _stopNotifyMethod();
                 }
                 else
@@ -49,10 +49,32 @@ namespace FoodTracker.ViewModel.Pages
             }
         }
 
-        public void ChangeNotifyState()
+        /// <summary>
+        /// Method should stop notifications, memory last time
+        /// </summary>
+        public void ChangeTimerStatus()
         {
+            if (NotifyValue)
+            {
+                PauseTimer();
+            }
+            else
+            {
+                ResumeTimer();
+            }
             NotifyValue = !NotifyValue;
         }
+
+        private void ResumeTimer()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void PauseTimer()
+        {
+            throw new System.NotImplementedException();
+        }
+
 
         /// <summary>
         /// Update string in MainPage's "On/Off" button
