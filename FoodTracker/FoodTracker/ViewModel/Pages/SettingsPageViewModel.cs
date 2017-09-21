@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using FoodTracker.Droid.Annotations;
 using FoodTracker.PlatformServices.Notifications.Options;
 
@@ -17,6 +15,8 @@ namespace FoodTracker.ViewModel.Pages
         public SettingsPageViewModel(MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
         {
             _interval = new IntervalOption();
+            _notify = new NotifyOption();
+            _timer = new TimerOption(_interval);
 
             _stopNotifyMethod = stopNotifyMethod;
             _startNotifyMethod = startNotifyMethod;

@@ -9,7 +9,7 @@ namespace FoodTracker.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        public SettingsPage(ref SettingsPageViewModel settingsPageViewModel)
+        public SettingsPage(SettingsPageViewModel settingsPageViewModel)
         {
             InitializeComponent();
 
