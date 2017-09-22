@@ -44,15 +44,15 @@ namespace FoodTracker.ViewModel.Pages
             {
                 _notify.Value = value;
 
-                // Cancel notification request
                 if (!value)
                 {
                     _stopNotifyMethod();
+                    _timer.Pause();
                 }
                 else
                 {
                     _startNotifyMethod((int) _interval.Value.TotalMilliseconds);
-                    _timer.SetTimer();
+                    _timer.Resume();
                 }
 
                 OnPropertyChanged();

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
@@ -48,10 +47,10 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             TimeSpan timeLeft = ComputeTimeLeft();
             if (timeLeft <= _zeroTime)
             {
-                SetTimer();
+                Start();
                 timeLeft = ComputeTimeLeft();
             }
-            return String.Format("{0:hh\\:mm\\:ss}", timeLeft);
+            return $"{timeLeft:hh\\:mm\\:ss}";
         }
 
         private TimeSpan ComputeTimeLeft()
@@ -62,20 +61,20 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             return forecastedTime - relativeNow;
         }
 
-        public void SetTimer()
+        public void Start()
         {
             StartTimerTime = DateTime.Now - _relativeTime;
         }
 
         /// <summary>
-        /// Method used only when timer was stoped
+        /// Method used only when timer is stoped
         /// </summary>
-        public void ResumeTimer()
+        public void Resume()
         {
             throw new NotImplementedException();
         }
 
-        public void PauseTimer()
+        public void Pause()
         {
             throw new NotImplementedException();
         }

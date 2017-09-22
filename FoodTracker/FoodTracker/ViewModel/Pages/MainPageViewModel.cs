@@ -73,7 +73,7 @@ namespace FoodTracker.ViewModel.Pages
         private void PauseTimer()
         {
             _stopNotifyMethod();
-            _timer.PauseTimer();
+            _timer.Pause();
         }
 
 
