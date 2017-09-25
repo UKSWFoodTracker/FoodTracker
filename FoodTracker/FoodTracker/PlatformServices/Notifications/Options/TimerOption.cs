@@ -7,37 +7,36 @@ namespace FoodTracker.PlatformServices.Notifications.Options
     {
         public TimerOption(IntervalOption intervalOption) : base("Interval")
         {
-            // Get value from myProperties
-            _startNotifyTime = StartTimerTime;
-
-            _relativeTime = DateTime.Parse("09.12.2017");
-            _zeroTime = new TimeSpan(0, 0, 0, 0);
-
             _intervalOption = intervalOption;
+            // Get value from myProperties
+            _startNotify = StartTimer;
+            _pauseTimer = PauseTimer;
+            _relative = DateTime.Parse("09.12.2017");
+            _zero = new TimeSpan(0, 0, 0, 0);
+            _isPaused = ComputeTimeLeft() <= _zero;
         }
 
         /// <summary>
         /// Reference to <seealso cref="IntervalOption.Value"/>
         /// </summary>
         private readonly IntervalOption _intervalOption;
-
         /// <summary>
         /// This field is needed to avoid performance crash in HowMuchTimeLeft property
         /// </summary>
-        private readonly TimeSpan _zeroTime;
-        
+        private readonly TimeSpan _zero;
         /// <summary>
         /// Time which indicates the beginning of an interval. 
         /// It means time when we start count down timer. 
         /// </summary>
-        private TimeSpan _startNotifyTime;
-        
+        private TimeSpan _startNotify;
         /// <summary>
-        /// According to that time we substract and add times
+        /// According to that time we substract and add times.
+        /// If sb wants get TimeSpan from DateTime structure, it's necessary. 
         /// </summary>
-        private readonly DateTime _relativeTime;
-
-        private TimeSpan _stopTimerTime;
+        private readonly DateTime _relative;
+        private TimeSpan _pauseTimer;
+        private bool _isPaused;
+        private TimeSpan _timerEnd;
 
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
@@ -45,7 +44,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         public string HowMuchTimeLeft()
         {
             TimeSpan timeLeft = ComputeTimeLeft();
-            if (timeLeft <= _zeroTime)
+            if (timeLeft <= _zero)
             {
                 Start();
                 timeLeft = ComputeTimeLeft();
@@ -56,60 +55,68 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         private TimeSpan ComputeTimeLeft()
         {
             //Forecasting when timer goes off
-            TimeSpan forecastedTime = _startNotifyTime + _intervalOption.Value;
-            TimeSpan relativeNow = DateTime.Now - _relativeTime;
-            return forecastedTime - relativeNow;
+            _timerEnd = _startNotify + _intervalOption.Value;
+            TimeSpan relativeNow = DateTime.Now - _relative;
+            return _timerEnd - relativeNow;
         }
 
         public void Start()
         {
-            StartTimerTime = DateTime.Now - _relativeTime;
+            StartTimer = DateTime.Now - _relative;
         }
 
         /// <summary>
-        /// Method used only when timer is stoped
+        /// Method used only when timer is stoped. It makes timer run again
         /// </summary>
         public void Resume()
         {
-            throw new NotImplementedException();
+            if (!_isPaused)
+                return;
+            _isPaused = false;
+
+            
         }
 
         public void Pause()
         {
-            throw new NotImplementedException();
+            if (_isPaused)
+                return;
+            _isPaused = true;
+
+            PauseTimer = DateTime.Now - _relative;
         }
 
-        public TimeSpan PauseTimerTime
+        public TimeSpan PauseTimer
         {
             get
             {
                 var app = Application.Current as App;
-                _stopTimerTime = app.myProperties.PauseNotifyTime;
-                return _stopTimerTime;
+                _pauseTimer = app.myProperties.PauseNotifyTime;
+                return _pauseTimer;
             }
             set
             {
                 var app = Application.Current as App;
                 app.myProperties.PauseNotifyTime = value;
-                _stopTimerTime = value;
+                _pauseTimer = value;
             }
         }
 
         /// <summary>
         /// Property for _startNotifyTime and it saves value to MyProperties class as well. 
-        /// <see cref="_startNotifyTime"/> 
+        /// <see cref="_startNotify"/> 
         /// </summary>
-        private TimeSpan StartTimerTime
+        private TimeSpan StartTimer
         {
             get
             {
-                _startNotifyTime = GetFromMyProperties();
-                return _startNotifyTime;
+                _startNotify = GetFromMyProperties();
+                return _startNotify;
             }
             set
             {
-                _startNotifyTime = value;
-                SaveToMyProperties(_startNotifyTime);
+                _startNotify = value;
+                SaveToMyProperties(_startNotify);
             }
         }
 
