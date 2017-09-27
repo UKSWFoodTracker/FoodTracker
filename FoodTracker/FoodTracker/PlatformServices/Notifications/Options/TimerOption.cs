@@ -13,7 +13,12 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             _pauseTime = PauseTime;
             _relative = DateTime.Parse("09.12.2017");
             _zero = new TimeSpan(0, 0, 0, 0);
-            _isPaused = ComputeTimeLeft() <= _zero;
+            IndicateTimerState();
+        }
+
+        private void IndicateTimerState()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -21,12 +26,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         private readonly IntervalOption _intervalOption;
         /// <summary>
-        /// This field is needed to avoid performance crash in HowMuchTimeLeft property
-        /// </summary>
-        private readonly TimeSpan _zero;
-        /// <summary>
-        /// Time which indicates the beginning of an interval. 
-        /// It means time when we start count down timer. 
+        /// Time when we start count down timer. 
         /// </summary>
         private TimeSpan _startTime;
         /// <summary>
@@ -34,9 +34,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// If sb wants get TimeSpan from DateTime structure, it's necessary. 
         /// </summary>
         private readonly DateTime _relative;
+        private readonly TimeSpan _zero;
         private TimeSpan _pauseTime;
-        private bool _isPaused;
-        private TimeSpan _timerEnd;
+        public TimerState State { get; set; }
+        /// <summary>
+        /// Forecasting when timer goes off
+        /// </summary>
+        private TimeSpan _endTime;
 
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
@@ -54,10 +58,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 
         private TimeSpan ComputeTimeLeft()
         {
-            //Forecasting when timer goes off
-            _timerEnd = _startTime + _intervalOption.Value;
+            _endTime = _startTime + _intervalOption.Value;
             TimeSpan relativeNow = DateTime.Now - _relative;
-            return _timerEnd - relativeNow;
+            if (State == TimerState.Paused)
+            {
+                _endTime += relativeNow - PauseTime;
+            }
+            return _endTime - relativeNow;
         }
 
         public void Start()
@@ -70,18 +77,18 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         public void Resume()
         {
-            if (!_isPaused)
+            if (State == TimerState.Paused)
                 return;
-            _isPaused = false;
+            State = TimerState.Running;
 
-            
+
         }
 
         public void Pause()
         {
-            if (_isPaused)
+            if (State == TimerState.Running)
                 return;
-            _isPaused = true;
+            State = TimerState.Paused;
 
             PauseTime = DateTime.Now - _relative;
         }
@@ -130,6 +137,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         {
             var app = Application.Current as App;
             app.myProperties.StartNotifyTime = value;
+        }
+
+        public enum TimerState
+        {
+            Running,
+            Stoped,
+            Paused
         }
     }
 }

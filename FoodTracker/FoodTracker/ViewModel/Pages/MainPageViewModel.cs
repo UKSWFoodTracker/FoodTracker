@@ -67,6 +67,8 @@ namespace FoodTracker.ViewModel.Pages
 
         private void ResumeTimer()
         {
+            _startNotifyMethod();
+            _timer.Resume();
             throw new System.NotImplementedException();
         }
 
@@ -85,7 +87,23 @@ namespace FoodTracker.ViewModel.Pages
             get
             {
                 OnPropertyChanged();
-                return !NotifyValue ? "On" : "Off";
+                string buttonText;
+                switch (_timer.State)
+                {
+                    case TimerOption.TimerState.Running:
+                        buttonText = "Pause";
+                        break;
+                    case TimerOption.TimerState.Stoped:
+                        buttonText = "Start";
+                        break;
+                    case TimerOption.TimerState.Paused:
+                        buttonText = "Resume";
+                        break;
+                    default:
+                        buttonText = "Default";
+                        break;
+                }
+                return buttonText;
             }
         }
 
