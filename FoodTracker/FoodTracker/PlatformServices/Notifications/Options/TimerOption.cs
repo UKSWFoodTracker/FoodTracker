@@ -45,7 +45,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
-        public string HowMuchTimeLeft()
+        public (string StringValue, TimeSpan TimeValue) HowMuchTimeLeft()
         {
             TimeSpan timeLeft = ComputeTimeLeft();
             if (timeLeft <= _zero)
@@ -53,7 +53,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
                 Start();
                 timeLeft = ComputeTimeLeft();
             }
-            return $"{timeLeft:hh\\:mm\\:ss}";
+            return ($"{timeLeft:hh\\:mm\\:ss}", timeLeft);
         }
 
         private TimeSpan ComputeTimeLeft()

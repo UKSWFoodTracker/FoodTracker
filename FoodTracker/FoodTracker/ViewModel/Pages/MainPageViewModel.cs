@@ -67,7 +67,7 @@ namespace FoodTracker.ViewModel.Pages
 
         private void ResumeTimer()
         {
-            _startNotifyMethod();
+            _startNotifyMethod((int)_timer.HowMuchTimeLeft().TimeValue.TotalMilliseconds);
             _timer.Resume();
             throw new System.NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace FoodTracker.ViewModel.Pages
 
 
         /// <summary>
-        /// Update string in MainPage's "On/Off" button
+        /// Update string in MainPage's button
         /// </summary>
         public string NotifyButton
         {
@@ -115,7 +115,7 @@ namespace FoodTracker.ViewModel.Pages
                 {
                     return "Interval off";
                 }
-                return _timer.HowMuchTimeLeft();
+                return _timer.HowMuchTimeLeft().StringValue;
             }
         }
 
