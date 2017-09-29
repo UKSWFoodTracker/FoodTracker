@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using FoodTracker.Droid.Annotations;
 using FoodTracker.PlatformServices.Notifications.Options;
+using FoodTracker.ViewModel.TimerService;
 
 namespace FoodTracker.ViewModel.Pages
 {

@@ -21,7 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\MealType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\NotifyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\NotifyOption.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\Timer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\TimerService\Timer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Option.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\IntervalOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Notifications\Options\VibrateOption.cs" />
@@ -68,5 +68,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModel\TimerService\" />
   </ItemGroup>
 </Project>

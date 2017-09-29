@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FoodTracker.PlatformServices.Notifications.Options;
+using FoodTracker.ViewModel.TimerService;
 using Xamarin.Forms;
 
 namespace FoodTracker.ViewModel

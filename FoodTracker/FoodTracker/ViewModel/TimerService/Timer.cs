@@ -1,7 +1,8 @@
 ﻿using System;
+using FoodTracker.PlatformServices.Notifications.Options;
 using Xamarin.Forms;
 
-namespace FoodTracker.PlatformServices.Notifications.Options
+namespace FoodTracker.ViewModel.TimerService
 {
     public class Timer
     {
