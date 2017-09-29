@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\ISQLiteDb.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Persistence\MyApplicationProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainFeatures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\TimerService\TimerProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\UpdateTimerValue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -68,8 +69,5 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModel\TimerService\" />
   </ItemGroup>
 </Project>
