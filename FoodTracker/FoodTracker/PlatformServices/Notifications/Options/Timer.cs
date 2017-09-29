@@ -3,12 +3,11 @@ using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    public class TimerOption : Option<TimeSpan>
+    public class Timer
     {
-        public TimerOption(IntervalOption intervalOption) : base("Interval")
+        public Timer(IntervalOption intervalOption)
         {
             _intervalOption = intervalOption;
-            _startTime = StartTime;
             _relative = DateTime.Parse("09.12.2017");
             _zero = new TimeSpan(0, 0, 0, 0);
         }
@@ -17,10 +16,6 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// Reference to <seealso cref="IntervalOption.Value"/>
         /// </summary>
         private readonly IntervalOption _intervalOption;
-        /// <summary>
-        /// Time when we start count down timer. 
-        /// </summary>
-        private TimeSpan _startTime;
         /// <summary>
         /// According to that time we substract and add times.
         /// If sb wants get TimeSpan from DateTime structure, it's necessary. 
@@ -48,7 +43,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
 
         private TimeSpan ComputeTimeLeft()
         {
-            _endTime = _startTime + _intervalOption.Value;
+            _endTime = StartTime + _intervalOption.Value;
             TimeSpan relativeNow = DateTime.Now - _relative;
             if (State == TimerState.Paused)
             {
@@ -111,33 +106,20 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         }
 
         /// <summary>
-        /// Property for _startNotifyTime and it saves value to MyProperties class as well. 
-        /// <see cref="_startTime"/> 
+        /// Time when we start count down timer. 
         /// </summary>
         private TimeSpan StartTime
         {
             get
             {
-                _startTime = GetFromMyProperties();
-                return _startTime;
+                var app = Application.Current as App;
+                return app.myProperties.StartNotifyTime;
             }
             set
             {
-                _startTime = value;
-                SaveToMyProperties(_startTime);
+                var app = Application.Current as App;
+                app.myProperties.StartNotifyTime = value;
             }
-        }
-
-        protected override TimeSpan GetFromMyProperties()
-        {
-            var app = Application.Current as App;
-            return app.myProperties.StartNotifyTime;
-        }
-        
-        protected override void SaveToMyProperties(TimeSpan value)
-        {
-            var app = Application.Current as App;
-            app.myProperties.StartNotifyTime = value;
         }
 
         public enum TimerState

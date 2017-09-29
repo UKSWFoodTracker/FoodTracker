@@ -20,16 +20,16 @@ namespace FoodTracker.ViewModel
         private readonly string NotifyStateKey = "NotifyState";
         private readonly string VibrateStateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
-        public TimerOption.TimerState TimerState
+        public Timer.TimerState TimerState
         {
             get
             {
                 if (Application.Current.Properties.ContainsKey(TimerStateKey))
                 {
-                    return (TimerOption.TimerState)Application.Current.Properties[TimerStateKey];
+                    return (Timer.TimerState)Application.Current.Properties[TimerStateKey];
                 }
-                Application.Current.Properties[TimerStateKey] = TimerOption.TimerState.Stoped;
-                return (TimerOption.TimerState)Application.Current.Properties[TimerStateKey];
+                Application.Current.Properties[TimerStateKey] = Timer.TimerState.Stoped;
+                return (Timer.TimerState)Application.Current.Properties[TimerStateKey];
             }
             set
             {

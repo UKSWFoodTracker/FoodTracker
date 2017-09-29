@@ -30,7 +30,7 @@ namespace FoodTracker.View
         private async void Settings_OnClicked(object sender, EventArgs e)
         {
             // Pass data to other page
-            var settingsPageVm = new SettingsPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
+            var settingsPageVm = new SettingsPageViewModel(_mainPageViewModel._timer, _mainFeatures.StartNotification, _mainFeatures.StopNotification);
             var settingsPage = new SettingsPage(settingsPageVm);
             await Navigation.PushAsync(settingsPage);
         }

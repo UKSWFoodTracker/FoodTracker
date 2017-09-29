@@ -10,13 +10,13 @@ namespace FoodTracker.ViewModel.Pages
     {
         private IntervalOption _interval;
         private readonly NotifyOption _notify;
-        private readonly TimerOption _timer;
+        private readonly Timer _timer;
 
-        public SettingsPageViewModel(MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
+        public SettingsPageViewModel(Timer timer, MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
         {
             _interval = new IntervalOption();
             _notify = new NotifyOption();
-            _timer = new TimerOption(_interval);
+            _timer = timer;
 
             _stopNotifyMethod = stopNotifyMethod;
             _startNotifyMethod = startNotifyMethod;

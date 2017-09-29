@@ -2,8 +2,6 @@
 {
     public abstract class Option<T>
     {
-        private T _value;
-
         protected Option(string name)
         {
             Name = name;
@@ -19,16 +17,8 @@
         /// </summary>
         public T Value
         {
-            get
-            {
-                _value = GetFromMyProperties();
-                return _value;
-            }
-            set
-            {
-                _value = value;
-                SaveToMyProperties(value);
-            }
+            get => GetFromMyProperties();
+            set => SaveToMyProperties(value);
         }
 
         protected abstract T GetFromMyProperties();

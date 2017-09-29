@@ -13,13 +13,13 @@ namespace FoodTracker.ViewModel.Pages
         private UpdateTimerValue _updateTimerValue;
         private readonly IntervalOption _interval;
         private readonly NotifyOption _notify;
-        private readonly TimerOption _timer;
+        public readonly Timer _timer;
 
         public MainPageViewModel(MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
         {
             _interval = new IntervalOption();
             _notify = new NotifyOption();
-            _timer = new TimerOption(_interval);
+            _timer = new Timer(_interval);
 
             _stopNotifyMethod = stopNotifyMethod;
             _startNotifyMethod = startNotifyMethod;
@@ -87,13 +87,13 @@ namespace FoodTracker.ViewModel.Pages
                 string buttonText;
                 switch (_timer.State)
                 {
-                    case TimerOption.TimerState.Running:
+                    case Timer.TimerState.Running:
                         buttonText = "Pause";
                         break;
-                    case TimerOption.TimerState.Stoped:
+                    case Timer.TimerState.Stoped:
                         buttonText = "Start";
                         break;
-                    case TimerOption.TimerState.Paused:
+                    case Timer.TimerState.Paused:
                         buttonText = "Resume";
                         break;
                     default:

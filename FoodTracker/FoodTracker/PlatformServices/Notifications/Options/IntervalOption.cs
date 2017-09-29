@@ -9,7 +9,6 @@ namespace FoodTracker.PlatformServices.Notifications.Options
     {
         public IntervalOption() : base("Interval")
         {
-            GetFromMyProperties();
         }
 
         protected sealed override TimeSpan GetFromMyProperties()
@@ -18,7 +17,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             return app.myProperties.IntervalTimeSpan;
         }
 
-        protected override void SaveToMyProperties(TimeSpan value)
+        protected sealed override void SaveToMyProperties(TimeSpan value)
         {
             var app = Application.Current as App;
             app.myProperties.IntervalTimeSpan = value;
