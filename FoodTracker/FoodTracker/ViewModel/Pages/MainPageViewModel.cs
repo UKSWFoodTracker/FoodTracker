@@ -11,15 +11,15 @@ namespace FoodTracker.ViewModel.Pages
     public class MainPageViewModel :INotifyPropertyChanged
     {
         private UpdateTimerValue _updateTimerValue;
-        private readonly TimerOption _timer;
         private readonly IntervalOption _interval;
         private readonly NotifyOption _notify;
+        private readonly TimerOption _timer;
 
         public MainPageViewModel(MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
         {
             _interval = new IntervalOption();
-            _timer = new TimerOption(_interval);
             _notify = new NotifyOption();
+            _timer = new TimerOption(_interval);
 
             _stopNotifyMethod = stopNotifyMethod;
             _startNotifyMethod = startNotifyMethod;
@@ -69,7 +69,6 @@ namespace FoodTracker.ViewModel.Pages
         {
             _startNotifyMethod((int)_timer.HowMuchTimeLeft().TimeValue.TotalMilliseconds);
             _timer.Resume();
-            throw new System.NotImplementedException();
         }
 
         private void PauseTimer()
@@ -78,7 +77,6 @@ namespace FoodTracker.ViewModel.Pages
             _timer.Pause();
         }
 
-
         /// <summary>
         /// Update string in MainPage's button
         /// </summary>
@@ -86,7 +84,6 @@ namespace FoodTracker.ViewModel.Pages
         {
             get
             {
-                OnPropertyChanged();
                 string buttonText;
                 switch (_timer.State)
                 {
@@ -103,6 +100,7 @@ namespace FoodTracker.ViewModel.Pages
                         buttonText = "Default";
                         break;
                 }
+                OnPropertyChanged();
                 return buttonText;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FoodTracker.PlatformServices.Notifications.Options;
 using Xamarin.Forms;
 
 namespace FoodTracker.ViewModel
@@ -12,12 +13,29 @@ namespace FoodTracker.ViewModel
     public class MyApplicationProperties
     {
         // Key which is stored in Application.Current.Properties dictionary
+        private readonly string TimerStateKey = "TimerState";
         private readonly string StartNotifyTimeKey = "StartNotifyTimeSpan";
         private readonly string PauseNotifyTimeKey = "PauseNotifyTimeSpan";
         private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
-        private readonly string NotifyKey = "NotifyState";
-        private readonly string VibrateKey = "VibrateState";
+        private readonly string NotifyStateKey = "NotifyState";
+        private readonly string VibrateStateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
+        public TimerOption.TimerState TimerState
+        {
+            get
+            {
+                if (Application.Current.Properties.ContainsKey(TimerStateKey))
+                {
+                    return (TimerOption.TimerState)Application.Current.Properties[TimerStateKey];
+                }
+                Application.Current.Properties[TimerStateKey] = TimerOption.TimerState.Stoped;
+                return (TimerOption.TimerState)Application.Current.Properties[TimerStateKey];
+            }
+            set
+            {
+                Application.Current.Properties[TimerStateKey] = value;
+            }
+        }
         public TimeSpan PauseNotifyTime
         {
             get
@@ -70,32 +88,32 @@ namespace FoodTracker.ViewModel
         {
             get
             {
-                if (Application.Current.Properties.ContainsKey(NotifyKey))
+                if (Application.Current.Properties.ContainsKey(NotifyStateKey))
                 {
-                    return (bool)Application.Current.Properties[NotifyKey];
+                    return (bool)Application.Current.Properties[NotifyStateKey];
                 }
-                Application.Current.Properties[NotifyKey] = true;
-                return (bool)Application.Current.Properties[NotifyKey];
+                Application.Current.Properties[NotifyStateKey] = true;
+                return (bool)Application.Current.Properties[NotifyStateKey];
             }
             set
             {
-                Application.Current.Properties[NotifyKey] = value;
+                Application.Current.Properties[NotifyStateKey] = value;
             }
         }
         public bool VibrateState
         {
             get
             {
-                if (Application.Current.Properties.ContainsKey(VibrateKey))
+                if (Application.Current.Properties.ContainsKey(VibrateStateKey))
                 {
-                    return (bool)Application.Current.Properties[VibrateKey];
+                    return (bool)Application.Current.Properties[VibrateStateKey];
                 }
-                Application.Current.Properties[VibrateKey] = true;
-                return (bool)Application.Current.Properties[VibrateKey];
+                Application.Current.Properties[VibrateStateKey] = true;
+                return (bool)Application.Current.Properties[VibrateStateKey];
             }
             set
             {
-                Application.Current.Properties[VibrateKey] = value;
+                Application.Current.Properties[VibrateStateKey] = value;
             }
         }
         public static async Task SaveProperties()

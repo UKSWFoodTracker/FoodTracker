@@ -1,11 +1,10 @@
 ﻿using System;
 using FoodTracker.ViewModel;
-using Xamarin.Forms;
 using FoodTracker.ViewModel.Pages;
 
 namespace FoodTracker.View
 {
-	public partial class MainPage : ContentPage
+	public partial class MainPage
 	{
 	    private readonly MainPageViewModel _mainPageViewModel;
 	    private readonly MainFeatures _mainFeatures;
@@ -31,8 +30,8 @@ namespace FoodTracker.View
         private async void Settings_OnClicked(object sender, EventArgs e)
         {
             // Pass data to other page
-            var settingsPageVM = new SettingsPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
-            var settingsPage = new SettingsPage(settingsPageVM);
+            var settingsPageVm = new SettingsPageViewModel(_mainFeatures.StartNotification, _mainFeatures.StopNotification);
+            var settingsPage = new SettingsPage(settingsPageVm);
             await Navigation.PushAsync(settingsPage);
         }
 
@@ -40,5 +39,11 @@ namespace FoodTracker.View
 	    {
 	        _mainPageViewModel.ChangeTimerStatus();
 	    }
-	}
+
+	    protected override async void OnDisappearing()
+	    {
+	        await MyApplicationProperties.SaveProperties();
+	        base.OnDisappearing();
+	    }
+    }
 }

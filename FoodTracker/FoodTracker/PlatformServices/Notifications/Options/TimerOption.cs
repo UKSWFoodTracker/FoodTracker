@@ -3,22 +3,14 @@ using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class TimerOption : Option<TimeSpan>
+    public class TimerOption : Option<TimeSpan>
     {
         public TimerOption(IntervalOption intervalOption) : base("Interval")
         {
             _intervalOption = intervalOption;
-            // Get values from myProperties
             _startTime = StartTime;
-            _pauseTime = PauseTime;
             _relative = DateTime.Parse("09.12.2017");
             _zero = new TimeSpan(0, 0, 0, 0);
-            IndicateTimerState();
-        }
-
-        private void IndicateTimerState()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -35,8 +27,6 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         private readonly DateTime _relative;
         private readonly TimeSpan _zero;
-        private TimeSpan _pauseTime;
-        public TimerState State { get; set; }
         /// <summary>
         /// Forecasting when timer goes off
         /// </summary>
@@ -77,20 +67,33 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         /// </summary>
         public void Resume()
         {
-            if (State == TimerState.Paused)
+            if (State == TimerState.Running)
                 return;
             State = TimerState.Running;
-
-
         }
 
         public void Pause()
         {
-            if (State == TimerState.Running)
+            if (State == TimerState.Paused ||
+                State == TimerState.Stoped)
                 return;
             State = TimerState.Paused;
 
             PauseTime = DateTime.Now - _relative;
+        }
+
+        public TimerState State
+        {
+            get
+            {
+                var app = Application.Current as App;
+                return app.myProperties.TimerState;
+            }
+            set
+            {
+                var app = Application.Current as App;
+                app.myProperties.TimerState = value;
+            }
         }
 
         private TimeSpan PauseTime
@@ -98,14 +101,12 @@ namespace FoodTracker.PlatformServices.Notifications.Options
             get
             {
                 var app = Application.Current as App;
-                _pauseTime = app.myProperties.PauseNotifyTime;
-                return _pauseTime;
+                return app.myProperties.PauseNotifyTime;
             }
             set
             {
                 var app = Application.Current as App;
                 app.myProperties.PauseNotifyTime = value;
-                _pauseTime = value;
             }
         }
 
@@ -142,7 +143,7 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         public enum TimerState
         {
             Running,
-            Stoped,
+            Stoped, // ...or turned off
             Paused
         }
     }

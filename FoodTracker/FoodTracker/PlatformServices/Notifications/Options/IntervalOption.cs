@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace FoodTracker.PlatformServices.Notifications.Options
 {
-    class IntervalOption : Option<TimeSpan>
+    public class IntervalOption : Option<TimeSpan>
     {
         public IntervalOption() : base("Interval")
         {
