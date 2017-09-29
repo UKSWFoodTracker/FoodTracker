@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <AbsoluteLayout Grid.Row="0" 
                         BackgroundColor="White">
-            <Label Text="AppName" 
+            <Label Text="Food Tracker" 
                    TextColor="Gray"
                    FontAttributes="Bold" 
                    FontSize="35" 

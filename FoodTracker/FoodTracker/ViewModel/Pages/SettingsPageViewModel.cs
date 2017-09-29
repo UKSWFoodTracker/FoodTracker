@@ -12,11 +12,11 @@ namespace FoodTracker.ViewModel.Pages
         private readonly NotifyOption _notify;
         private readonly Timer _timer;
 
-        public SettingsPageViewModel(Timer timer, MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
+        public SettingsPageViewModel(MainFeatures.StartNotificationHandler startNotifyMethod, MainFeatures.StopNotificationHandler stopNotifyMethod)
         {
             _interval = new IntervalOption();
             _notify = new NotifyOption();
-            _timer = timer;
+            _timer = new Timer(_interval);
 
             _stopNotifyMethod = stopNotifyMethod;
             _startNotifyMethod = startNotifyMethod;
@@ -27,7 +27,11 @@ namespace FoodTracker.ViewModel.Pages
             get => String.Format("{0:hh\\:mm\\:ss}", _interval.Value);
             set
             {
-                _interval.Value = TimeSpan.Parse(value);
+                if (!TimeSpan.TryParse(value, out TimeSpan timeSpan))
+                {
+                    return;
+                }
+                _interval.Value = timeSpan;
                 OnPropertyChanged();
             }
         }
