@@ -23,99 +23,34 @@ namespace FoodTracker.ViewModel
         //TODO: ADDING NEW OPTION: key & application properties
         public Timer.TimerState TimerState
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(TimerStateKey))
-                {
-                    return (Timer.TimerState)Application.Current.Properties[TimerStateKey];
-                }
-                Application.Current.Properties[TimerStateKey] = Timer.TimerState.Stoped;
-                return (Timer.TimerState)Application.Current.Properties[TimerStateKey];
-            }
-            set
-            {
-                Application.Current.Properties[TimerStateKey] = value;
-            }
+            get => GetFromDictionary(TimerStateKey, Timer.TimerState.Stoped);
+            set => SaveToDictionary(TimerStateKey, value);
         }
         public TimeSpan PauseNotifyTime
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(PauseNotifyTimeKey))
-                {
-                    return (TimeSpan)Application.Current.Properties[PauseNotifyTimeKey];
-                }
-                Application.Current.Properties[PauseNotifyTimeKey] = new TimeSpan();
-                return (TimeSpan)Application.Current.Properties[PauseNotifyTimeKey];
-            }
-            set
-            {
-                Application.Current.Properties[PauseNotifyTimeKey] = value;
-            }
+
+            get => GetFromDictionary(PauseNotifyTimeKey, new TimeSpan());
+            set => SaveToDictionary(PauseNotifyTimeKey, value);
         }
         public TimeSpan StartNotifyTime
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(StartNotifyTimeKey))
-                {
-                    return (TimeSpan)Application.Current.Properties[StartNotifyTimeKey];
-                }
-                Application.Current.Properties[StartNotifyTimeKey] = new TimeSpan();
-                return (TimeSpan)Application.Current.Properties[StartNotifyTimeKey];
-            }
-            set
-            {
-                Application.Current.Properties[StartNotifyTimeKey] = value;
-            }
+            get => GetFromDictionary(StartNotifyTimeKey, new TimeSpan());
+            set => SaveToDictionary(StartNotifyTimeKey, value);
         }
         public TimeSpan IntervalTimeSpan
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(IntervalTimeSpanKey))
-                {
-                    return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
-                }
-                Application.Current.Properties[IntervalTimeSpanKey] = new TimeSpan();
-                return (TimeSpan)Application.Current.Properties[IntervalTimeSpanKey];
-            }
-            set
-            {
-                Application.Current.Properties[IntervalTimeSpanKey] = value;
-            }
+            get => GetFromDictionary(IntervalTimeSpanKey, new TimeSpan());
+            set => SaveToDictionary(IntervalTimeSpanKey, value);
         }
         public bool NotifyState
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(NotifyStateKey))
-                {
-                    return (bool)Application.Current.Properties[NotifyStateKey];
-                }
-                Application.Current.Properties[NotifyStateKey] = true;
-                return (bool)Application.Current.Properties[NotifyStateKey];
-            }
-            set
-            {
-                Application.Current.Properties[NotifyStateKey] = value;
-            }
+            get => GetFromDictionary(NotifyStateKey, true);
+            set => SaveToDictionary(NotifyStateKey, value);
         }
         public bool VibrateState
         {
-            get
-            {
-                if (Application.Current.Properties.ContainsKey(VibrateStateKey))
-                {
-                    return (bool)Application.Current.Properties[VibrateStateKey];
-                }
-                Application.Current.Properties[VibrateStateKey] = true;
-                return (bool)Application.Current.Properties[VibrateStateKey];
-            }
-            set
-            {
-                Application.Current.Properties[VibrateStateKey] = value;
-            }
+            get => GetFromDictionary(VibrateStateKey, true);
+            set => SaveToDictionary(VibrateStateKey, value);
         }
 
         private T GetFromDictionary<T>(string key, T defaultValue)
