@@ -117,6 +117,22 @@ namespace FoodTracker.ViewModel
                 Application.Current.Properties[VibrateStateKey] = value;
             }
         }
+
+        private T GetFromDictionary<T>(string key, T defaultValue)
+        {
+            if (Application.Current.Properties.ContainsKey(key))
+            {
+                return (T)Application.Current.Properties[key];
+            }
+            Application.Current.Properties[key] = defaultValue;
+            return (T)Application.Current.Properties[key];
+        }
+
+        private void SaveToDictionary<T>(string key, T newValue)
+        {
+            Application.Current.Properties[key] = newValue;
+        }
+
         public static async Task SaveProperties()
         {
             await Application.Current.SavePropertiesAsync();
