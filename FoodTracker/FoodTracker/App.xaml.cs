@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.Content;
-using FoodTracker.ViewModel;
-
+﻿using FoodTracker.ViewModel;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
 using Xamarin.Forms;
 
 namespace FoodTracker
 {
-	public partial class App : Application
-    {
-        public MyApplicationProperties myProperties;
-        
+	public partial class App
+	{
+        public MyApplicationProperties MyProperties;
+
+	    public static ISettings AppSettings => CrossSettings.Current;
+
         public App ()
 		{
 			InitializeComponent();
-            myProperties = new MyApplicationProperties();
+            MyProperties = new MyApplicationProperties();
 
             MainPage = new NavigationPage(new View.MainPage())
             {

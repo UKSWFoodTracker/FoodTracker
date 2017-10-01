@@ -83,12 +83,12 @@ namespace FoodTracker.ViewModel.TimerService
             get
             {
                 var app = Application.Current as App;
-                return app.myProperties.TimerState;
+                return app.MyProperties.TimerState;
             }
             set
             {
                 var app = Application.Current as App;
-                app.myProperties.TimerState = value;
+                app.MyProperties.TimerState = value;
             }
         }
 
@@ -97,12 +97,12 @@ namespace FoodTracker.ViewModel.TimerService
             get
             {
                 var app = Application.Current as App;
-                return app.myProperties.PauseNotifyTime;
+                return app.MyProperties.PauseNotifyTime;
             }
             set
             {
                 var app = Application.Current as App;
-                app.myProperties.PauseNotifyTime = value;
+                app.MyProperties.PauseNotifyTime = value;
             }
         }
 
@@ -114,12 +114,12 @@ namespace FoodTracker.ViewModel.TimerService
             get
             {
                 var app = Application.Current as App;
-                return app.myProperties.StartNotifyTime;
+                return app.MyProperties.StartNotifyTime;
             }
             set
             {
                 var app = Application.Current as App;
-                app.myProperties.StartNotifyTime = value;
+                app.MyProperties.StartNotifyTime = value;
             }
         }
 
