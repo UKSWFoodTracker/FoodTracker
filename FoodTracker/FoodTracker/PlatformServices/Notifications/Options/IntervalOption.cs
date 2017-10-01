@@ -14,13 +14,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         protected sealed override TimeSpan GetFromMyProperties()
         {
             var app = Application.Current as App;
-            return app.MyProperties.IntervalTimeSpan;
+            return app.myProperties.IntervalTimeSpan;
         }
 
         protected sealed override void SaveToMyProperties(TimeSpan value)
         {
             var app = Application.Current as App;
-            app.MyProperties.IntervalTimeSpan = value;
+            app.myProperties.IntervalTimeSpan = value;
         }
     }
 }

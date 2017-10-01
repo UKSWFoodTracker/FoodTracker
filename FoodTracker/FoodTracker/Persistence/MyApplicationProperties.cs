@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FoodTracker.PlatformServices.Notifications.Options;
 using FoodTracker.ViewModel.TimerService;
@@ -16,58 +15,62 @@ namespace FoodTracker.ViewModel
     {
         // Key which is stored in Application.Current.Properties dictionary
         private readonly string TimerStateKey = "TimerState";
-        private readonly string StartNotifyTimeKey = "StartNotifyTime";
-        private readonly string PauseNotifyTimeKey = "PauseNotifyTime";
-        private readonly string IntervalTimeSpanKey = "IntervalTime";
+        private readonly string StartNotifyTimeKey = "StartNotifyTimeSpan";
+        private readonly string PauseNotifyTimeKey = "PauseNotifyTimeSpan";
+        private readonly string IntervalTimeSpanKey = "IntervalTimeSpan";
         private readonly string NotifyStateKey = "NotifyState";
         private readonly string VibrateStateKey = "VibrateState";
         //TODO: ADDING NEW OPTION: key & application properties
         public Timer.TimerState TimerState
         {
-            get => (Timer.TimerState)App.AppSettings.GetValueOrDefault(TimerStateKey, (int)Timer.TimerState.Stoped);
-            set => App.AppSettings.AddOrUpdateValue(TimerStateKey, (int)value);
+            get => GetFromDictionary(TimerStateKey, Timer.TimerState.Stoped);
+            set => SaveToDictionary(TimerStateKey, value);
         }
         public TimeSpan PauseNotifyTime
         {
-            get => GetValueOrDefault();
-            set => App.AppSettings.AddOrUpdateValue(PauseNotifyTimeKey, value.TotalMilliseconds);
-        }
 
+            get => GetFromDictionary(PauseNotifyTimeKey, new TimeSpan());
+            set => SaveToDictionary(PauseNotifyTimeKey, value);
+        }
         public TimeSpan StartNotifyTime
         {
-            get => GetValueOrDefault();
-            set => App.AppSettings.AddOrUpdateValue(StartNotifyTimeKey, value.TotalMilliseconds);
+            get => GetFromDictionary(StartNotifyTimeKey, new TimeSpan());
+            set => SaveToDictionary(StartNotifyTimeKey, value);
         }
-
         public TimeSpan IntervalTimeSpan
         {
-            get => GetValueOrDefault();
-            set => App.AppSettings.AddOrUpdateValue(IntervalTimeSpanKey, value.TotalMilliseconds);
+            get => GetFromDictionary(IntervalTimeSpanKey, new TimeSpan());
+            set => SaveToDictionary(IntervalTimeSpanKey, value);
         }
         public bool NotifyState
         {
-            get => App.AppSettings.GetValueOrDefault(NotifyStateKey, true);
-            set => App.AppSettings.AddOrUpdateValue(NotifyStateKey, value);
+            get => GetFromDictionary(NotifyStateKey, true);
+            set => SaveToDictionary(NotifyStateKey, value);
         }
         public bool VibrateState
         {
-            get => App.AppSettings.GetValueOrDefault(VibrateStateKey, true);
-            set => App.AppSettings.AddOrUpdateValue(VibrateStateKey, value);
+            get => GetFromDictionary(VibrateStateKey, true);
+            set => SaveToDictionary(VibrateStateKey, value);
         }
 
-        private TimeSpan GetValueOrDefault([CallerMemberName] string key = null)
+        private T GetFromDictionary<T>(string key, T defaultValue)
         {
-            TimeSpan defaultValue = new TimeSpan();
-            if (!App.AppSettings.Contains(key))
-                return defaultValue;
-            long newValue = App.AppSettings.GetValueOrDefault(key, 0);
-            return new TimeSpan(newValue);
+            if (Application.Current.Properties.ContainsKey(key))
+            {
+                return (T)Application.Current.Properties[key];
+            }
+            Application.Current.Properties[key] = defaultValue;
+            return (T)Application.Current.Properties[key];
+        }
+
+        private void SaveToDictionary<T>(string key, T newValue)
+        {
+            Application.Current.Properties[key] = newValue;
         }
 
         public static async Task SaveProperties()
         {
             await Application.Current.SavePropertiesAsync();
-            throw new NotImplementedException();
         }
     }
 }

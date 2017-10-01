@@ -15,13 +15,13 @@ namespace FoodTracker.PlatformServices.Notifications.Options
         protected sealed override bool GetFromMyProperties()
         {
             var app = Application.Current as App;
-            return app.MyProperties.NotifyState;
+            return app.myProperties.NotifyState;
         }
 
         protected override void SaveToMyProperties(bool value)
         {
             var app = Application.Current as App;
-            app.MyProperties.NotifyState = value;
+            app.myProperties.NotifyState = value;
         }
     }
 }
