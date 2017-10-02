@@ -1,14 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Xamarin.Forms;
 
 namespace FoodTracker.ViewModel.TimerService
 {
-    class TimerProperties
+    public partial class Timer
     {
-        public TimerProperties()
+        public TimerState State
         {
-            throw new NotImplementedException();
+            get
+            {
+                var app = Application.Current as App;
+                return app.myProperties.TimerState;
+            }
+            set
+            {
+                var app = Application.Current as App;
+                app.myProperties.TimerState = value;
+            }
+        }
+
+        private TimeSpan PauseTime
+        {
+            get
+            {
+                var app = Application.Current as App;
+                return app.myProperties.PauseNotifyTime;
+            }
+            set
+            {
+                var app = Application.Current as App;
+                app.myProperties.PauseNotifyTime = value;
+            }
+        }
+
+        /// <summary>
+        /// Time when we start count down timer. 
+        /// </summary>
+        private TimeSpan StartTime
+        {
+            get
+            {
+                var app = Application.Current as App;
+                return app.myProperties.StartNotifyTime;
+            }
+            set
+            {
+                var app = Application.Current as App;
+                app.myProperties.StartNotifyTime = value;
+            }
+        }
+
+        public enum TimerState
+        {
+            Running,
+            Stoped, // ...or turned off
+            Paused
         }
     }
 }
