@@ -1,11 +1,15 @@
 ﻿using System;
 using FoodTracker.ViewModel;
 using FoodTracker.ViewModel.Pages;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace FoodTracker.View
 {
-	public partial class MainPage
-	{
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainPage : ContentPage
+    {
 	    private readonly MainPageViewModel _mainPageViewModel;
 	    private readonly MainFeatures _mainFeatures;
 
