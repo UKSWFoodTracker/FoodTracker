@@ -6,7 +6,7 @@ using FoodTracker.ViewModel.Pages;
 
 namespace FoodTracker.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
         public SettingsPage(SettingsPageViewModel settingsPageViewModel)

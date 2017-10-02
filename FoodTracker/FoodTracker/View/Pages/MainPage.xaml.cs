@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace FoodTracker.View
 {
 
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
 	    private readonly MainPageViewModel _mainPageViewModel;
