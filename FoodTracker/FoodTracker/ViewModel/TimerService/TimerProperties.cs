@@ -5,17 +5,17 @@ namespace FoodTracker.ViewModel.TimerService
 {
     public partial class Timer
     {
-        public TimerState State
+        public TimerStates States
         {
             get
             {
                 var app = Application.Current as App;
-                return app.myProperties.TimerState;
+                return app.myProperties.TimerStates;
             }
             set
             {
                 var app = Application.Current as App;
-                app.myProperties.TimerState = value;
+                app.myProperties.TimerStates = value;
             }
         }
 
@@ -50,7 +50,7 @@ namespace FoodTracker.ViewModel.TimerService
             }
         }
 
-        public enum TimerState
+        public enum TimerStates
         {
             Running,
             Stoped, // ...or turned off

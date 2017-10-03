@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using FoodTracker.PlatformServices.Notifications.Options;
 
 namespace FoodTracker.ViewModel.TimerService
@@ -27,6 +28,8 @@ namespace FoodTracker.ViewModel.TimerService
         /// </summary>
         private TimeSpan _endTime;
 
+        private TimeSpan Now => DateTime.Now - _relative;
+
         /// <summary>
         /// Time left to the end of next interval. It should be binded with a page's controls
         /// </summary>
@@ -44,17 +47,16 @@ namespace FoodTracker.ViewModel.TimerService
         private TimeSpan ComputeTimeLeft()
         {
             _endTime = StartTime + _intervalOption.Value;
-            TimeSpan relativeNow = DateTime.Now - _relative;
-            if (State == TimerState.Paused)
+            if (States == TimerStates.Paused)
             {
-                _endTime += relativeNow - PauseTime;
+                _endTime += Now - PauseTime;
             }
-            return _endTime - relativeNow;
+            return _endTime - Now;
         }
 
         public void Start()
         {
-            StartTime = DateTime.Now - _relative;
+            StartTime = Now;
         }
 
         /// <summary>
@@ -62,19 +64,19 @@ namespace FoodTracker.ViewModel.TimerService
         /// </summary>
         public void Resume()
         {
-            if (State == TimerState.Running)
+            if (States == TimerStates.Running)
                 return;
-            State = TimerState.Running;
+            States = TimerStates.Running;
         }
 
         public void Pause()
         {
-            if (State == TimerState.Paused ||
-                State == TimerState.Stoped)
+            if (States == TimerStates.Paused ||
+                States == TimerStates.Stoped)
                 return;
-            State = TimerState.Paused;
+            States = TimerStates.Paused;
 
-            PauseTime = DateTime.Now - _relative;
+            PauseTime = Now;
         }
     }
 }

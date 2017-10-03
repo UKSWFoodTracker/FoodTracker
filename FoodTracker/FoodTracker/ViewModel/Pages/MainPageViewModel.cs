@@ -86,15 +86,15 @@ namespace FoodTracker.ViewModel.Pages
             get
             {
                 string buttonText;
-                switch (_timer.State)
+                switch (_timer.States)
                 {
-                    case Timer.TimerState.Running:
+                    case Timer.TimerStates.Running:
                         buttonText = "Pause";
                         break;
-                    case Timer.TimerState.Stoped:
+                    case Timer.TimerStates.Stoped:
                         buttonText = "Start";
                         break;
-                    case Timer.TimerState.Paused:
+                    case Timer.TimerStates.Paused:
                         buttonText = "Resume";
                         break;
                     default:
